@@ -34,6 +34,14 @@ button {
   border: none;
 }
 
+button:hover {
+  transform: scale(1.05);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
 img {
   max-width: 100%;
   display: block;
