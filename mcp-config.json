@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "figma": {
+      "command": "node",
+      "args": ["mcp-server.js"],
+      "cwd": "F:\\codes mekky\\qudraat_shabab",
+      "env": {
+        "NODE_ENV": "development"
+      }
+    }
+  }
+}

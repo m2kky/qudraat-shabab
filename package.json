@@ -1,14 +1,24 @@
 {
   "name": "qudraat-shabab",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
+  "description": "منصة تدريبية متكاملة للشباب السعودي لتطوير المهارات وبناء المستقبل المهني",
+  "keywords": ["react", "training", "saudi", "youth", "education", "arabic"],
+  "author": "قدرات شباب",
+  "license": "MIT",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "mcp:start": "node mcp-server.js",
+    "figma:test": "node test-figma.js"
   },
   "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.20.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-icons": "^5.5.0",
@@ -16,6 +26,24 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.4",
-    "vite": "^6.0.5"
-  }
+    "vite": "^6.0.5",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react": "^7.34.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.6",
+    "vitest": "^1.4.0",
+    "@vitest/ui": "^1.4.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/qudraat-shabab/platform.git"
+  },
+  "bugs": {
+    "url": "https://github.com/qudraat-shabab/platform/issues"
+  },
+  "homepage": "https://qudraat-shabab.com"
 }
