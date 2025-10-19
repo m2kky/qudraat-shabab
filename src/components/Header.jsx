@@ -14,7 +14,7 @@ function Header() {
 
   return (
     <header style={styles.header}>
-      <div className="container" style={styles.container}>
+      <div className="container header-container" style={styles.container}>
         {/* Logo */}
         <Link 
           to="/" 
@@ -69,22 +69,25 @@ function Header() {
 
 const styles = {
   header: {
-    background: 'var(--white)',
+    background: 'rgba(255, 255, 255, 0.8)',
+    backdropFilter: 'blur(20px)',
+    WebkitBackdropFilter: 'blur(20px)',
     boxShadow: 'var(--shadow-md)',
     position: 'sticky',
     top: 0,
     zIndex: 100,
-    borderBottom: '1px solid var(--gray-light)'
+    borderBottom: '1px solid rgba(255, 255, 255, 0.2)'
   },
   container: {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: 'var(--spacing-md) 0',
-    minHeight: '70px'
+    minHeight: '70px',
+    flexDirection: 'row'
   },
   logo: {
-    fontSize: 'clamp(1.25rem, 4vw, 1.75rem)',
+    fontSize: 'var(--font-size-xl)',
     fontWeight: '900',
     color: 'var(--primary)',
     textDecoration: 'none',
@@ -109,11 +112,14 @@ const styles = {
   },
   mobileNav: {
     flexDirection: 'column',
-    background: 'var(--white)',
-    borderTop: '1px solid var(--gray-light)',
+    background: 'rgba(255, 255, 255, 0.95)',
+    backdropFilter: 'blur(20px)',
+    WebkitBackdropFilter: 'blur(20px)',
+    borderTop: '1px solid rgba(255, 255, 255, 0.2)',
     padding: 'var(--spacing-md) 0',
     gap: 'var(--spacing-sm)',
-    boxShadow: 'var(--shadow-lg)'
+    boxShadow: 'var(--shadow-lg)',
+    animation: 'slideDown 0.3s ease-out'
   },
   mobileNavLink: {
     color: 'var(--dark)',
@@ -155,6 +161,17 @@ const styles = {
 
 // Media queries for responsive design
 const mediaQueries = `
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
   @media (min-width: 768px) {
     .desktop-nav {
       display: flex !important;
@@ -176,6 +193,31 @@ const mediaQueries = `
     
     .menu-button {
       display: flex !important;
+    }
+    
+    .header-container {
+      padding: var(--spacing-sm) 0 !important;
+      flex-direction: row !important;
+      justify-content: space-between !important;
+    }
+    
+    .header-logo {
+      font-size: var(--font-size-lg) !important;
+      order: 1 !important;
+    }
+    
+    .menu-button {
+      order: 2 !important;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .header-container {
+      padding: var(--spacing-xs) 0 !important;
+    }
+    
+    .header-logo {
+      font-size: var(--font-size-base) !important;
     }
   }
 `;

@@ -125,3 +125,4 @@ class FigmaFetcher {
 }
 
 export default FigmaFetcher;
+

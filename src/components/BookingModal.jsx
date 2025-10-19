@@ -340,7 +340,7 @@ const styles = {
     top: 'var(--spacing-lg)',
     left: 'var(--spacing-lg)',
     background: 'transparent',
-    fontSize: '1.5rem',
+    fontSize: 'var(--font-size-xl)',
     color: 'var(--gray)',
     padding: 'var(--spacing-sm)',
     borderRadius: 'var(--radius-md)',
@@ -358,13 +358,13 @@ const styles = {
     textAlign: 'center'
   },
   title: {
-    fontSize: 'clamp(1.5rem, 4vw, 2rem)',
+    fontSize: 'var(--font-size-2xl)',
     fontWeight: '700',
     marginBottom: 'var(--spacing-sm)',
     color: 'var(--dark)'
   },
   description: {
-    fontSize: '1rem',
+    fontSize: 'var(--font-size-base)',
     color: 'var(--gray)',
     lineHeight: '1.5',
     margin: 0
@@ -380,14 +380,14 @@ const styles = {
     gap: 'var(--spacing-xs)'
   },
   label: {
-    fontSize: '0.875rem',
+    fontSize: 'var(--font-size-sm)',
     fontWeight: '600',
     color: 'var(--dark)',
     marginBottom: 'var(--spacing-xs)'
   },
   input: {
     padding: 'var(--spacing-md)',
-    fontSize: '1rem',
+    fontSize: 'var(--font-size-base)',
     border: '1px solid var(--gray-light)',
     borderRadius: 'var(--radius-md)',
     fontFamily: 'Tajawal, sans-serif',
@@ -397,7 +397,7 @@ const styles = {
   },
   textarea: {
     padding: 'var(--spacing-md)',
-    fontSize: '1rem',
+    fontSize: 'var(--font-size-base)',
     border: '1px solid var(--gray-light)',
     borderRadius: 'var(--radius-md)',
     fontFamily: 'Tajawal, sans-serif',
@@ -408,7 +408,7 @@ const styles = {
     minHeight: '80px'
   },
   error: {
-    fontSize: '0.75rem',
+    fontSize: 'var(--font-size-xs)',
     color: 'var(--error)',
     fontWeight: '500',
     marginTop: 'var(--spacing-xs)'
@@ -422,7 +422,7 @@ const styles = {
     background: 'transparent',
     color: 'var(--gray)',
     padding: 'var(--spacing-md) var(--spacing-lg)',
-    fontSize: '1rem',
+    fontSize: 'var(--font-size-base)',
     fontWeight: '500',
     borderRadius: 'var(--radius-md)',
     border: '1px solid var(--gray-light)',
@@ -434,7 +434,7 @@ const styles = {
     background: 'var(--primary)',
     color: 'var(--white)',
     padding: 'var(--spacing-md) var(--spacing-lg)',
-    fontSize: '1rem',
+    fontSize: 'var(--font-size-base)',
     fontWeight: '600',
     borderRadius: 'var(--radius-md)',
     border: 'none',
@@ -444,7 +444,7 @@ const styles = {
     position: 'relative'
   },
   helpText: {
-    fontSize: '0.75rem',
+    fontSize: 'var(--font-size-xs)',
     color: 'var(--gray)',
     textAlign: 'center',
     margin: 'var(--spacing-md) 0 0 0',

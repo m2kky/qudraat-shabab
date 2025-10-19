@@ -6,11 +6,8 @@ function EventsSection() {
   const [filteredEvents, setFilteredEvents] = useState(events);
 
   const categories = [
-    { id: 'all', name: 'جميع الفعاليات', icon: '🎯' },
-    { id: 'تدريب', name: 'دورات تدريبية', icon: '📚' },
-    { id: 'مؤتمر', name: 'مؤتمرات', icon: '🎤' },
-    { id: 'ورشة', name: 'ورش عمل', icon: '🛠️' },
-    { id: 'ندوة', name: 'ندوات', icon: '💡' }
+    { id: 'all', name: 'جميع الورش', icon: '🎯' },
+    { id: 'ورشة', name: 'ورش عمل', icon: '🛠️' }
   ];
 
   const handleCategoryFilter = (categoryId) => {
@@ -37,19 +34,20 @@ function EventsSection() {
         {/* Section Header */}
         <div style={styles.header}>
           <h2 id="events-title" style={styles.title}>
-            فعالياتنا التدريبية
+            ورشنا التدريبية
           </h2>
           <p style={styles.subtitle}>
-            اكتشف مجموعة متنوعة من الفعاليات والدورات التدريبية المصممة خصيصاً لتطوير مهاراتك
+            اكتشف مجموعة متنوعة من الورش التدريبية المصممة خصيصاً لتطوير مهاراتك
           </p>
         </div>
 
         {/* Category Filter */}
         <div style={styles.filterContainer}>
-          <div style={styles.filterButtons}>
+          <div className="filter-buttons" style={styles.filterButtons}>
             {categories.map(category => (
               <button
                 key={category.id}
+                className="filter-button"
                 style={{
                   ...styles.filterButton,
                   ...(selectedCategory === category.id ? styles.filterButtonActive : {})
@@ -65,61 +63,90 @@ function EventsSection() {
         </div>
 
         {/* Events Grid */}
-        <div style={styles.eventsGrid}>
-          {filteredEvents.map(event => (
-            <article key={event.id} style={styles.eventCard}>
-              <div style={styles.eventImage}>
-                <img 
-                  src={event.image} 
-                  alt={event.title}
-                  style={styles.image}
-                  loading="lazy"
-                />
-                <div style={styles.eventCategory}>
-                  <span style={styles.categoryBadge}>{event.category}</span>
-                </div>
-              </div>
-              
-              <div style={styles.eventContent}>
-                <div style={styles.eventMeta}>
-                  <span style={styles.eventDate}>
-                    📅 {formatDate(event.date)}
-                  </span>
-                  <span style={styles.eventDuration}>
-                    ⏱️ {event.duration}
-                  </span>
-                </div>
-                
-                <h3 style={styles.eventTitle}>{event.title}</h3>
-                <p style={styles.eventDescription}>{event.description}</p>
-                
-                <div style={styles.eventDetails}>
-                  <div style={styles.eventDetail}>
-                    <span style={styles.detailLabel}>المستوى:</span>
-                    <span style={styles.detailValue}>{event.level}</span>
+        <div className="events-grid" style={styles.eventsGrid}>
+          {filteredEvents.map(event => {
+            const isEventEnded = new Date(event.date) < new Date();
+            return (
+              <article key={event.id} className="event-card" style={styles.eventCard}>
+                {/* Top Image Section */}
+                <div style={styles.eventTopSection}>
+                  {/* Background Image */}
+                  <div style={styles.backgroundImageContainer}>
+                    <img 
+                      src={event.instructorImage || event.image} 
+                      alt={event.instructor}
+                      style={styles.backgroundImage}
+                    />
+                    <div style={styles.imageOverlay}></div>
                   </div>
-                  <div style={styles.eventDetail}>
-                    <span style={styles.detailLabel}>السعر:</span>
-                    <span style={styles.detailValue}>{event.price}</span>
+                  
+                  {/* Logo */}
+                  <div style={styles.eventLogo}>
+                    <span style={styles.logoText}>قدرات شباب</span>
+                    <div style={styles.logoIcon}>ق</div>
+                  </div>
+                  
+                  {/* Ended Tag */}
+                  {isEventEnded && (
+                    <div style={styles.endedTag}>
+                      <span style={styles.endedText}>أنهيت الدورة</span>
+                      <div style={styles.checkIcon}>✓</div>
+                    </div>
+                  )}
+                  
+                  {/* Participants Counter */}
+                  <div style={styles.participantsCounter}>
+                    <div style={styles.participantIcon}>👤</div>
+                    <span style={styles.participantCount}>{event.participants || 13}</span>
+                  </div>
+                  
+                  {/* Title Overlay with Fade */}
+                  <div style={styles.titleOverlay}>
+                    <div style={styles.fadeGradient}></div>
+                    <div style={styles.eventTitleSection}>
+                      <h3 style={styles.eventMainTitle}>{event.title}</h3>
+                      <p style={styles.eventSubtitle}>{event.subtitle || event.category}</p>
+                    </div>
                   </div>
                 </div>
                 
-                <div style={styles.eventActions}>
-                  <button style={styles.registerButton}>
-                    سجل الآن
-                  </button>
-                  <button style={styles.detailsButton}>
-                    التفاصيل
-                  </button>
+                {/* Bottom White Section */}
+                <div style={styles.eventBottomSection}>
+                  <p style={styles.eventDescription}>{event.description}</p>
+                  
+                  <div style={styles.eventInfo}>
+                    <div style={styles.eventDateTime}>
+                      <div style={styles.eventDate}>{formatDate(event.date)}</div>
+                      <div style={styles.eventTime}>{event.time || '3 عصراً'}</div>
+                    </div>
+                    
+                    <div style={styles.instructorInfo}>
+                      <span style={styles.instructorNameBottom}>{event.instructor}</span>
+                      <img 
+                        src={event.instructorImage || event.image} 
+                        alt={event.instructor}
+                        style={styles.instructorThumbnail}
+                      />
+                    </div>
+                  </div>
+                  
+                  <div style={styles.eventActions}>
+                    <button className="details-button" style={styles.detailsButton}>
+                      التفاصيل
+                    </button>
+                    <button className="register-button" style={styles.registerButton}>
+                      سجل الآن
+                    </button>
+                  </div>
                 </div>
-              </div>
-            </article>
-          ))}
+              </article>
+            );
+          })}
         </div>
 
         {/* Load More Button */}
         <div style={styles.loadMoreContainer}>
-          <button style={styles.loadMoreButton}>
+          <button className="load-more-button" style={styles.loadMoreButton}>
             عرض المزيد من الفعاليات
           </button>
         </div>
@@ -144,14 +171,14 @@ const styles = {
     marginBottom: 'var(--spacing-3xl)'
   },
   title: {
-    fontSize: 'clamp(1.75rem, 5vw, 2.5rem)',
+    fontSize: 'var(--font-size-3xl)',
     fontWeight: '900',
     color: 'var(--dark)',
     marginBottom: 'var(--spacing-md)',
     position: 'relative'
   },
   subtitle: {
-    fontSize: 'clamp(1rem, 3vw, 1.25rem)',
+    fontSize: 'var(--font-size-lg)',
     color: 'var(--gray)',
     maxWidth: '600px',
     margin: '0 auto',
@@ -198,7 +225,7 @@ const styles = {
   },
   eventsGrid: {
     display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
     gap: 'var(--spacing-xl)',
     marginBottom: 'var(--spacing-2xl)'
   },
@@ -209,18 +236,223 @@ const styles = {
     boxShadow: 'var(--shadow-lg)',
     transition: 'all var(--transition-normal)',
     border: '1px solid var(--gray-light)',
-    position: 'relative'
-  },
-  eventImage: {
     position: 'relative',
-    height: '200px',
+    display: 'flex',
+    flexDirection: 'column',
+    height: '500px'
+  },
+  // New Card Design Styles
+  eventTopSection: {
+    background: 'var(--Primary, #0017BB)',
+    padding: 'var(--spacing-lg)',
+    position: 'relative',
+    flex: '2',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: 'white',
     overflow: 'hidden'
   },
-  image: {
+  backgroundImageContainer: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    zIndex: 1
+  },
+  backgroundImage: {
     width: '100%',
     height: '100%',
     objectFit: 'cover',
-    transition: 'transform var(--transition-normal)'
+    objectPosition: 'center'
+  },
+  imageOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    background: 'rgba(0, 23, 187, 0.3)',
+    zIndex: 2
+  },
+  titleOverlay: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    zIndex: 3
+  },
+  fadeGradient: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    background: 'linear-gradient(transparent, rgba(0, 0, 0, 0.8))',
+    zIndex: 1
+  },
+  eventBottomSection: {
+    background: 'var(--white)',
+    padding: 'var(--spacing-lg)',
+    flex: '1',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    gap: 'var(--spacing-md)'
+  },
+  eventLogo: {
+    position: 'absolute',
+    top: 'var(--spacing-md)',
+    right: 'var(--spacing-md)',
+    display: 'flex',
+    alignItems: 'center',
+    gap: 'var(--spacing-xs)',
+    zIndex: 3
+  },
+  logoText: {
+    fontSize: 'var(--font-size-sm)',
+    fontWeight: '600',
+    color: 'white'
+  },
+  logoIcon: {
+    width: '24px',
+    height: '24px',
+    borderRadius: '50%',
+    background: 'white',
+    color: 'var(--Primary, #0017BB)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: 'var(--font-size-sm)',
+    fontWeight: '700'
+  },
+  endedTag: {
+    position: 'absolute',
+    top: 'var(--spacing-md)',
+    left: 'var(--spacing-md)',
+    background: 'white',
+    padding: 'var(--spacing-xs) var(--spacing-sm)',
+    borderRadius: 'var(--radius-md)',
+    display: 'flex',
+    alignItems: 'center',
+    gap: 'var(--spacing-xs)',
+    zIndex: 3
+  },
+  endedText: {
+    fontSize: 'var(--font-size-xs)',
+    color: 'var(--dark)',
+    fontWeight: '600'
+  },
+  checkIcon: {
+    width: '16px',
+    height: '16px',
+    borderRadius: '50%',
+    background: 'var(--success)',
+    color: 'white',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '10px'
+  },
+  instructorImageContainer: {
+    width: '120px',
+    height: '120px',
+    borderRadius: '50%',
+    overflow: 'hidden',
+    marginBottom: 'var(--spacing-md)',
+    border: '4px solid rgba(255, 255, 255, 0.3)'
+  },
+  instructorImage: {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover'
+  },
+  eventTitleSection: {
+    textAlign: 'center',
+    padding: 'var(--spacing-lg)',
+    position: 'relative',
+    zIndex: 2
+  },
+  eventMainTitle: {
+    fontSize: 'var(--font-size-xl)',
+    fontWeight: '700',
+    color: 'white',
+    margin: '0 0 var(--spacing-xs) 0'
+  },
+  eventSubtitle: {
+    fontSize: 'var(--font-size-sm)',
+    color: 'rgba(255, 255, 255, 0.8)',
+    margin: 0
+  },
+  instructorName: {
+    fontSize: 'var(--font-size-sm)',
+    color: 'white',
+    marginBottom: 'var(--spacing-md)'
+  },
+  participantsCounter: {
+    position: 'absolute',
+    bottom: 'var(--spacing-md)',
+    left: 'var(--spacing-md)',
+    display: 'flex',
+    alignItems: 'center',
+    gap: 'var(--spacing-xs)',
+    zIndex: 3
+  },
+  participantIcon: {
+    fontSize: 'var(--font-size-lg)',
+    color: 'white'
+  },
+  participantCount: {
+    fontSize: 'var(--font-size-lg)',
+    fontWeight: '700',
+    color: 'white'
+  },
+  eventBottomTitle: {
+    fontSize: 'var(--font-size-lg)',
+    fontWeight: '700',
+    color: 'var(--Primary, #0017BB)',
+    margin: '0 0 var(--spacing-sm) 0'
+  },
+  eventInfo: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 'var(--spacing-md)'
+  },
+  eventDateTime: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 'var(--spacing-xs)'
+  },
+  eventDate: {
+    fontSize: 'var(--font-size-sm)',
+    color: 'var(--dark)',
+    fontWeight: '600'
+  },
+  eventTime: {
+    fontSize: 'var(--font-size-sm)',
+    color: 'var(--dark)',
+    fontWeight: '600'
+  },
+  instructorInfo: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: 'var(--spacing-sm)',
+    flexDirection: 'row-reverse'
+  },
+  instructorThumbnail: {
+    width: '40px',
+    height: '40px',
+    borderRadius: '50%',
+    objectFit: 'cover',
+    border: '2px solid var(--Primary, #0017BB)'
+  },
+  instructorNameBottom: {
+    fontSize: 'var(--font-size-sm)',
+    color: 'var(--dark)',
+    fontWeight: '600'
   },
   eventCategory: {
     position: 'absolute',
@@ -264,10 +496,10 @@ const styles = {
     lineHeight: '1.3'
   },
   eventDescription: {
-    fontSize: '0.875rem',
+    fontSize: 'var(--font-size-base)',
     color: 'var(--gray)',
-    lineHeight: '1.5',
-    marginBottom: 'var(--spacing-md)',
+    lineHeight: '1.6',
+    margin: 0,
     display: '-webkit-box',
     WebkitLineClamp: 3,
     WebkitBoxOrient: 'vertical',
@@ -298,10 +530,11 @@ const styles = {
   },
   eventActions: {
     display: 'flex',
-    gap: 'var(--spacing-sm)'
+    gap: 'var(--spacing-sm)',
+    justifyContent: 'space-between'
   },
   registerButton: {
-    background: 'var(--primary)',
+    background: 'var(--Primary, #0017BB)',
     color: 'var(--white)',
     padding: 'var(--spacing-sm) var(--spacing-lg)',
     borderRadius: 'var(--radius-md)',
@@ -314,10 +547,10 @@ const styles = {
   },
   detailsButton: {
     background: 'transparent',
-    color: 'var(--primary)',
+    color: 'var(--Primary, #0017BB)',
     padding: 'var(--spacing-sm) var(--spacing-lg)',
     borderRadius: 'var(--radius-md)',
-    border: '1px solid var(--primary)',
+    border: '1px solid var(--Primary, #0017BB)',
     fontSize: '0.875rem',
     fontWeight: '500',
     cursor: 'pointer',
@@ -343,6 +576,35 @@ const styles = {
 
 // Media queries for responsive design
 const mediaQueries = `
+  @media (max-width: 767px) {
+    .events-grid {
+      grid-template-columns: 1fr !important;
+      gap: var(--spacing-lg) !important;
+    }
+    
+    .filter-buttons {
+      flex-wrap: wrap !important;
+      gap: var(--spacing-sm) !important;
+    }
+    
+    .filter-button {
+      font-size: var(--font-size-sm) !important;
+      padding: var(--spacing-sm) var(--spacing-md) !important;
+    }
+    
+    .event-card {
+      margin: 0 !important;
+    }
+    
+    .event-title {
+      font-size: var(--font-size-xl) !important;
+    }
+    
+    .event-description {
+      font-size: var(--font-size-sm) !important;
+    }
+  }
+  
   @media (min-width: 768px) {
     .events-grid {
       grid-template-columns: repeat(2, 1fr) !important;

@@ -1,8 +1,11 @@
 import Header from '../components/Header';
 import Hero from '../components/Hero';
+import StatsSection from '../components/StatsSection';
 import EventsSection from '../components/EventsSection';
-import AboutSection from '../components/AboutSection';
-import ContactSection from '../components/ContactSection';
+import GallerySection from '../components/GallerySection';
+import TestimonialsSection from '../components/TestimonialsSection';
+import LocationSection from '../components/LocationSection';
+import SubscribeSection from '../components/SubscribeSection';
 import Footer from '../components/Footer';
 
 function Home() {
@@ -11,9 +14,12 @@ function Home() {
       <Header />
       <main>
         <Hero />
+        <StatsSection />
         <EventsSection />
-        <AboutSection />
-        <ContactSection />
+        <GallerySection />
+        <TestimonialsSection />
+        <LocationSection />
+        <SubscribeSection />
       </main>
       <Footer />
     </>

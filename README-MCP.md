@@ -95,3 +95,4 @@ Once the MCP server is running, you can:
 - [Figma API Documentation](https://www.figma.com/developers/api)
 - [MCP Documentation](https://modelcontextprotocol.io/)
 - [Figma Personal Access Tokens](https://www.figma.com/developers/api#access-tokens)
+

@@ -202,13 +202,13 @@ const styles = {
     marginBottom: 'var(--spacing-3xl)'
   },
   title: {
-    fontSize: 'clamp(1.75rem, 5vw, 2.5rem)',
+    fontSize: 'var(--font-size-3xl)',
     fontWeight: '900',
     color: 'var(--dark)',
     marginBottom: 'var(--spacing-sm)'
   },
   subtitle: {
-    fontSize: '1.125rem',
+    fontSize: 'var(--font-size-lg)',
     color: 'var(--gray)',
     maxWidth: '500px',
     margin: '0 auto'

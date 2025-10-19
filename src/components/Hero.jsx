@@ -14,51 +14,196 @@ function Hero() {
 
   return (
     <>
-      <section style={styles.hero} role="banner">
-        <div className="container" style={styles.container}>
-          <div style={styles.content}>
-            <h1 style={styles.title}>
-              اكتشف قدراتك وطوّر مهاراتك
+      <section className="hero-section" style={styles.hero} role="banner">
+        <div className="container hero-container" style={styles.container}>
+          <div className="hero-content" style={styles.content}>
+            <h1 className="hero-title" style={styles.title}>
+              قدراتك الحقيقية
             </h1>
-            <p style={styles.subtitle}>
-              منصة تدريبية متكاملة للشباب السعودي لتطوير المهارات وبناء المستقبل المهني
+            <h2 className="hero-subtitle" style={styles.subtitle}>
+              أكبــــر مـمـا تتخيل
+            </h2>
+            <p className="hero-description" style={styles.description}>
+              هتتعلم خطوة بخطوة، ومع الوقت هتكتشف
             </p>
-            <div style={styles.features}>
-              <div style={styles.feature}>
-                <span style={styles.featureIcon}>🎯</span>
-                <span>تدريب متخصص</span>
-              </div>
-              <div style={styles.feature}>
-                <span style={styles.featureIcon}>👥</span>
-                <span>مجتمع تفاعلي</span>
-              </div>
-              <div style={styles.feature}>
-                <span style={styles.featureIcon}>📈</span>
-                <span>تطوير مستمر</span>
+            <p className="hero-description" style={{...styles.description, marginBottom: 'var(--spacing-2xl)'}}>
+             إن قدراتــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــــك أكبر مما تتخيل
+            </p>
+            <div className="hero-social-proof" style={styles.socialProof}>
+              <p style={styles.socialText}>انضم إلى آلاف الطلاب</p>
+              <div style={styles.avatars}>
+                <img 
+                  src="/assets/Qudraat Shabab/Ellipse 4.png" 
+                  alt="طالب" 
+                  style={styles.avatar}
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    const fallback = document.createElement('div');
+                    fallback.style.cssText = `
+                      width: 32px;
+                      height: 32px;
+                      border-radius: 50%;
+                      background: var(--primary);
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      font-size: 1rem;
+                      color: var(--white);
+                      box-shadow: var(--shadow-sm);
+                      border: 2px solid var(--white);
+                      margin-left: -8px;
+                    `;
+                    fallback.textContent = '👨';
+                    e.target.parentNode.appendChild(fallback);
+                  }}
+                />
+                <img 
+                  src="/assets/Qudraat Shabab/Ellipse 5.png" 
+                  alt="طالبة" 
+                  style={styles.avatar}
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    const fallback = document.createElement('div');
+                    fallback.style.cssText = `
+                      width: 32px;
+                      height: 32px;
+                      border-radius: 50%;
+                      background: var(--primary);
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      font-size: 1rem;
+                      color: var(--white);
+                      box-shadow: var(--shadow-sm);
+                      border: 2px solid var(--white);
+                      margin-left: -8px;
+                    `;
+                    fallback.textContent = '👩';
+                    e.target.parentNode.appendChild(fallback);
+                  }}
+                />
+                <img 
+                  src="/assets/Qudraat Shabab/Ellipse 6.png" 
+                  alt="طالب" 
+                  style={styles.avatar}
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    const fallback = document.createElement('div');
+                    fallback.style.cssText = `
+                      width: 32px;
+                      height: 32px;
+                      border-radius: 50%;
+                      background: var(--primary);
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      font-size: 1rem;
+                      color: var(--white);
+                      box-shadow: var(--shadow-sm);
+                      border: 2px solid var(--white);
+                      margin-left: -8px;
+                    `;
+                    fallback.textContent = '👨‍💼';
+                    e.target.parentNode.appendChild(fallback);
+                  }}
+                />
+                <img 
+                  src="/assets/Qudraat Shabab/Ellipse 7.png" 
+                  alt="طالبة" 
+                  style={styles.avatar}
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    const fallback = document.createElement('div');
+                    fallback.style.cssText = `
+                      width: 32px;
+                      height: 32px;
+                      border-radius: 50%;
+                      background: var(--primary);
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      font-size: 1rem;
+                      color: var(--white);
+                      box-shadow: var(--shadow-sm);
+                      border: 2px solid var(--white);
+                      margin-left: -8px;
+                    `;
+                    fallback.textContent = '👩‍💻';
+                    e.target.parentNode.appendChild(fallback);
+                  }}
+                />
+                <img 
+                  src="/assets/Qudraat Shabab/Ellipse 8.png" 
+                  alt="طالب" 
+                  style={styles.avatar}
+                  onError={(e) => {
+                    e.target.style.display = 'none';
+                    const fallback = document.createElement('div');
+                    fallback.style.cssText = `
+                      width: 32px;
+                      height: 32px;
+                      border-radius: 50%;
+                      background: var(--primary);
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
+                      font-size: 1rem;
+                      color: var(--white);
+                      box-shadow: var(--shadow-sm);
+                      border: 2px solid var(--white);
+                      margin-left: -8px;
+                    `;
+                    fallback.textContent = '👨‍🎓';
+                    e.target.parentNode.appendChild(fallback);
+                  }}
+                />
+                <div style={styles.moreAvatars}>+2K</div>
               </div>
             </div>
-            <div style={styles.ctaContainer}>
-              <button 
-                style={styles.cta}
-                onClick={handleBookingClick}
-                aria-label="احجز مقعدك في إحدى دوراتنا التدريبية"
-              >
-                احجز مقعدك الآن
-              </button>
+            <div className="hero-cta-container" style={styles.ctaContainer}>
               <button 
                 style={styles.secondaryCta}
                 onClick={() => document.getElementById('events')?.scrollIntoView({ behavior: 'smooth' })}
                 aria-label="استكشف الفعاليات المتاحة"
               >
-                استكشف الفعاليات
+                الفعاليات
+              </button>
+              <button 
+                style={styles.cta}
+                onClick={handleBookingClick}
+                aria-label="احجز مقعدك في إحدى دوراتنا التدريبية"
+              >
+                من نحن؟
               </button>
             </div>
           </div>
-          <div style={styles.visual}>
-            <div style={styles.heroImage}>
-              <div style={styles.imagePlaceholder}>
-                <span style={styles.placeholderText}>صورة توضيحية</span>
-              </div>
+          <div className="hero-visual" style={styles.visual}>
+            <div className="hero-image" style={styles.heroImage}>
+              <img 
+                src="/assets/heroboy.png" 
+                alt="شاب مبتسم مع هالة زرقاء"
+                className="hero-image-content"
+                style={styles.heroImageContent}
+                onError={(e) => {
+                  console.log('Error loading hero image:', e.target.src);
+                  e.target.style.display = 'none';
+                  // Show fallback emoji
+                  const fallback = document.createElement('div');
+                  fallback.style.cssText = `
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 8rem;
+                    background: var(--light);
+                    border-radius: var(--radius-xl);
+                  `;
+                  fallback.textContent = '👨‍💻';
+                  e.target.parentNode.appendChild(fallback);
+                }}
+                onLoad={() => console.log('Hero image loaded successfully')}
+              />
             </div>
           </div>
         </div>
@@ -70,169 +215,380 @@ function Hero() {
 
 const styles = {
   hero: {
-    minHeight: '100vh',
+    minHeight: '50vh',
     display: 'flex',
     alignItems: 'center',
-    background: 'linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%)',
+    background: 'var(--white)',
     position: 'relative',
-    overflow: 'hidden'
+    overflow: 'visible',
+    padding: '0'
   },
   container: {
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'row',
     alignItems: 'center',
-    gap: 'var(--spacing-2xl)',
+    gap: 'var(--spacing-3xl)',
     padding: 'var(--spacing-2xl) 0',
-    minHeight: '100vh',
-    justifyContent: 'center'
+    minHeight: '40vh',
+    justifyContent: 'space-between'
   },
   content: {
-    textAlign: 'center',
-    color: 'var(--white)',
-    maxWidth: '600px',
-    zIndex: 2
+    textAlign: 'right',
+    color: 'var(--dark)',
+    maxWidth: '500px',
+    zIndex: 2,
+    flex: 1
   },
   title: {
-    fontSize: 'clamp(1.75rem, 6vw, 3.5rem)',
+    fontSize: 'var(--font-size-5xl)',
     fontWeight: '900',
     marginBottom: 'var(--spacing-lg)',
-    lineHeight: '1.1',
-    textShadow: '0 2px 4px rgba(0,0,0,0.1)'
+    lineHeight: '1.2',
+    color: 'var(--Primary, #0017BB)',
+    textAlign: 'center',
+    fontFamily: 'Zain, Inter, Tajawal, sans-serif',
+    fontStyle: 'normal'
   },
   subtitle: {
-    fontSize: 'clamp(1rem, 3vw, 1.375rem)',
-    marginBottom: 'var(--spacing-2xl)',
-    opacity: '0.95',
+    fontSize: 'var(--font-size-5xl)',
+    marginBottom: 'var(--spacing-lg)',
+    color: 'var(--Primary, #0017BB)',
+    lineHeight: '1.2',
+    fontWeight: '900',
+    textAlign: 'center',
+    fontFamily: 'Zain, Inter, Tajawal, sans-serif',
+    fontStyle: 'normal'
+  },
+  description: {
+    fontSize: 'var(--font-size-lg)',
+    marginBottom: 'var(--spacing-sm)',
+    color: 'var(--gray)',
     lineHeight: '1.6',
-    fontWeight: '400'
-  },
-  features: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 'var(--spacing-md)',
-    marginBottom: 'var(--spacing-2xl)',
-    alignItems: 'center'
-  },
-  feature: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: 'var(--spacing-sm)',
-    fontSize: 'clamp(0.875rem, 2.5vw, 1.125rem)',
-    fontWeight: '500',
-    opacity: '0.9'
-  },
-  featureIcon: {
-    fontSize: '1.5rem',
-    filter: 'drop-shadow(0 1px 2px rgba(0,0,0,0.1))'
+    fontWeight: 'bold'
   },
   ctaContainer: {
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'row',
     gap: 'var(--spacing-md)',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginBottom: 'var(--spacing-2xl)'
   },
   cta: {
-    background: 'var(--white)',
-    color: 'var(--primary)',
+    background: 'var(--primary)',
+    color: 'var(--white)',
     padding: 'var(--spacing-md) var(--spacing-2xl)',
-    fontSize: 'clamp(1rem, 2.5vw, 1.25rem)',
-    fontWeight: '700',
+    fontSize: 'clamp(1rem, 2.5vw, 1.125rem)',
+    fontWeight: '600',
     borderRadius: 'var(--radius-full)',
     transition: 'all var(--transition-normal)',
-    boxShadow: 'var(--shadow-xl)',
+    boxShadow: 'var(--shadow-md)',
     border: 'none',
     cursor: 'pointer',
-    minWidth: '200px',
-    position: 'relative',
-    overflow: 'hidden'
+    minWidth: '150px'
   },
   secondaryCta: {
     background: 'transparent',
-    color: 'var(--white)',
-    padding: 'var(--spacing-sm) var(--spacing-xl)',
-    fontSize: 'clamp(0.875rem, 2vw, 1.125rem)',
+    color: 'var(--primary)',
+    padding: 'var(--spacing-md) var(--spacing-2xl)',
+    fontSize: 'clamp(1rem, 2.5vw, 1.125rem)',
     fontWeight: '500',
     borderRadius: 'var(--radius-full)',
     transition: 'all var(--transition-normal)',
-    border: '2px solid rgba(255,255,255,0.3)',
+    border: '2px solid var(--primary)',
     cursor: 'pointer',
-    minWidth: '180px'
+    minWidth: '150px'
+  },
+  socialProof: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: 'var(--spacing-md)',
+    marginBottom: 'var(--spacing-lg)'
+  },
+  socialText: {
+    fontSize: 'clamp(0.875rem, 2vw, 1rem)',
+    color: 'var(--gray)',
+    fontWeight: '500',
+    margin: 0
+  },
+  avatars: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: 'var(--spacing-xs)'
+  },
+  avatar: {
+    width: '32px',
+    height: '32px',
+    borderRadius: 'var(--radius-full)',
+    objectFit: 'cover',
+    boxShadow: 'var(--shadow-sm)',
+    border: '2px solid var(--white)',
+    marginLeft: '-8px'
+  },
+  moreAvatars: {
+    width: '32px',
+    height: '32px',
+    borderRadius: 'var(--radius-full)',
+    background: 'var(--secondary)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '0.75rem',
+    fontWeight: '700',
+    color: 'var(--white)',
+    boxShadow: 'var(--shadow-sm)',
+    border: '2px solid var(--white)',
+    marginLeft: '-8px'
   },
   visual: {
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'flex-end',
     width: '100%',
-    maxWidth: '500px'
+    maxWidth: '600px',
+    flex: 1,
+    position: 'relative'
   },
   heroImage: {
     width: '100%',
-    height: '300px',
-    borderRadius: 'var(--radius-xl)',
-    overflow: 'hidden',
-    boxShadow: 'var(--shadow-xl)',
-    background: 'rgba(255,255,255,0.1)',
-    backdropFilter: 'blur(10px)',
-    border: '1px solid rgba(255,255,255,0.2)'
-  },
-  imagePlaceholder: {
-    width: '100%',
-    height: '100%',
+    height: 'auto',
+    borderRadius: '0',
+    overflow: 'visible',
+    boxShadow: 'none',
     display: 'flex',
-    alignItems: 'center',
+    alignItems: 'flex-end',
     justifyContent: 'center',
-    background: 'linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05))'
+    position: 'relative',
+    background: 'transparent'
   },
-  placeholderText: {
-    color: 'rgba(255,255,255,0.7)',
-    fontSize: '1.125rem',
-    fontWeight: '500'
+  heroImageContent: {
+    width: '100%',
+    height: 'auto',
+    objectFit: 'contain',
+    objectPosition: 'bottom center',
+    transform: 'translateY(50px)'
   }
 };
 
 // Media queries for responsive design
 const mediaQueries = `
-  @media (min-width: 768px) {
+  @media (max-width: 768px) {
+    .hero-section {
+      min-height: 40vh !important;
+      padding: 60px 0 20px 0 !important;
+    }
+    
     .hero-container {
-      flex-direction: row !important;
-      text-align: left !important;
-      gap: var(--spacing-3xl) !important;
+      flex-direction: column !important;
+      text-align: center !important;
+      gap: var(--spacing-2xl) !important;
+      min-height: 30vh !important;
+      padding: 0 !important;
+      margin: 0 !important;
     }
     
     .hero-content {
-      text-align: left !important;
-      max-width: 50% !important;
-    }
-    
-    .hero-features {
-      flex-direction: row !important;
-      justify-content: flex-start !important;
-      flex-wrap: wrap !important;
+      text-align: center !important;
+      max-width: 100% !important;
+      width: 100% !important;
+      padding: 0 var(--spacing-md) !important;
     }
     
     .hero-cta-container {
       flex-direction: row !important;
-      justify-content: flex-start !important;
+      justify-content: center !important;
+      gap: var(--spacing-md) !important;
+    }
+    
+    .hero-social-proof {
+      justify-content: center !important;
     }
     
     .hero-visual {
-      max-width: 45% !important;
+      max-width: 100% !important;
+    }
+    
+    .hero-image {
+      height: auto !important;
+    }
+    
+    .hero-image-content {
+      transform: translateY(30px) !important;
+    }
+    
+    .hero-title {
+      font-size: 3rem !important;
+      line-height: 3.6rem !important;
+    }
+    
+    .hero-subtitle {
+      font-size: 3rem !important;
+      line-height: 3.6rem !important;
+    }
+    
+    .hero-description {
+      font-size: 20px !important;
+    }
+    
+    .hero-content {
+      order: 1 !important;
+    }
+    
+    .hero-visual {
+      order: 2 !important;
+    }
+    
+    .hero-title {
+      order: 1 !important;
+    }
+    
+    .hero-subtitle {
+      order: 2 !important;
+    }
+    
+    .hero-description {
+      order: 3 !important;
+    }
+    
+    .hero-social-proof {
+      order: 4 !important;
+      margin-bottom: var(--spacing-lg) !important;
+    }
+    
+    .hero-cta-container {
+      order: 5 !important;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .hero-section {
+      padding: 50px 0 20px 0 !important;
+    }
+    
+    .hero-container {
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+    
+    .hero-content {
+      padding: 0 var(--spacing-sm) !important;
+    }
+    
+    .hero-title {
+      font-size: 2.5rem !important;
+      line-height: 3rem !important;
+    }
+    
+    .hero-subtitle {
+      font-size: 2.5rem !important;
+      line-height: 3rem !important;
+    }
+    
+    .hero-description {
+      font-size: 18px !important;
+    }
+    
+    .hero-content {
+      order: 1 !important;
+    }
+    
+    .hero-visual {
+      order: 2 !important;
+    }
+    
+    .hero-title {
+      order: 1 !important;
+    }
+    
+    .hero-subtitle {
+      order: 2 !important;
+    }
+    
+    .hero-description {
+      order: 3 !important;
+    }
+    
+    .hero-social-proof {
+      order: 4 !important;
+      margin-bottom: var(--spacing-lg) !important;
+    }
+    
+    .hero-cta-container {
+      order: 5 !important;
     }
   }
   
   @media (min-width: 1024px) {
+    .hero-section {
+      min-height: 50vh !important;
+    }
+    
     .hero-container {
       gap: var(--spacing-3xl) !important;
+      min-height: 40vh !important;
+      flex-direction: row !important;
+    }
+    
+    .hero-content {
+      order: 1 !important;
+    }
+    
+    .hero-visual {
+      order: 2 !important;
     }
     
     .hero-image {
-      height: 400px !important;
+      height: auto !important;
+    }
+    
+    .hero-image-content {
+      transform: translateY(40px) !important;
+    }
+    
+    .hero-title {
+      font-size: var(--font-size-4xl) !important;
+      line-height: 1.2 !important;
+    }
+    
+    .hero-subtitle {
+      font-size: var(--font-size-4xl) !important;
+      line-height: 1.2 !important;
     }
   }
   
   @media (min-width: 1280px) {
+    .hero-section {
+      min-height: 50vh !important;
+    }
+    
+    .hero-container {
+      min-height: 40vh !important;
+      flex-direction: row !important;
+    }
+    
+    .hero-content {
+      order: 1 !important;
+    }
+    
+    .hero-visual {
+      order: 2 !important;
+    }
+    
     .hero-image {
-      height: 450px !important;
+      height: auto !important;
+    }
+    
+    .hero-image-content {
+      transform: translateY(60px) !important;
+    }
+    
+    .hero-title {
+      font-size: var(--font-size-5xl) !important;
+      line-height: 1.2 !important;
+    }
+    
+    .hero-subtitle {
+      font-size: var(--font-size-5xl) !important;
+      line-height: 1.2 !important;
     }
   }
 `;

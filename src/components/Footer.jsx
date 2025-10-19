@@ -153,13 +153,13 @@ const styles = {
     textAlign: 'center'
   },
   brandTitle: {
-    fontSize: 'clamp(1.5rem, 4vw, 2rem)',
+    fontSize: 'var(--font-size-2xl)',
     fontWeight: '900',
     color: 'var(--primary)',
     marginBottom: 'var(--spacing-md)'
   },
   brandDescription: {
-    fontSize: '1rem',
+    fontSize: 'var(--font-size-base)',
     lineHeight: '1.6',
     opacity: '0.9',
     marginBottom: 'var(--spacing-lg)',
