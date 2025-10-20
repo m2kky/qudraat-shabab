@@ -3,14 +3,20 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "المساحة الأمنة للشباب",
+  "description": "منصة تدريبية متكاملة لتطوير مهارات الشباب السعودي في مجالات التكنولوجيا والبرمجة",
   "keywords": [
     "react",
+    "firebase",
     "training",
-    "egypt",
+    "saudi-arabia",
     "youth",
     "education",
-    "arabic"
+    "arabic",
+    "programming",
+    "technology",
+    "workshops",
+    "dashboard",
+    "admin"
   ],
   "author": "قدرات شباب",
   "license": "MIT",
@@ -27,6 +33,7 @@
   "dependencies": {
     "@barba/core": "^2.10.3",
     "@modelcontextprotocol/sdk": "^1.20.1",
+    "firebase": "^12.4.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-icons": "^5.5.0",

@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { events } from '../data/mockData';
+import { events } from '../data/events';
 import EventCard from '../components/events/EventCard';
 import Calendar from '../components/events/Calendar';
 

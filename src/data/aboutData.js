@@ -2,122 +2,122 @@
 // @ts-nocheck
 export const values = [
   {
-    icon: "Icon1",
-    title: "Value 1",
-    description: "Description for value 1.",
+    icon: "💡",
+    title: "الإبداع",
+    description: "نؤمن بقوة الإبداع في حل المشاكل وابتكار الحلول المبتكرة للشباب.",
   },
   {
-    icon: "Icon2",
-    title: "Value 2",
-    description: "Description for value 2.",
+    icon: "🎯",
+    title: "الاحترافية",
+    description: "نلتزم بأعلى معايير الجودة والاحترافية في جميع برامجنا التدريبية.",
   },
   {
-    icon: "Icon3",
-    title: "Value 3",
-    description: "Description for value 3.",
+    icon: "⭐",
+    title: "التميز",
+    description: "نسعى للتميز في كل ما نقدمه من خدمات تعليمية وتدريبية للشباب.",
   },
   {
-    icon: "Icon4",
-    title: "Value 4",
-    description: "Description for value 4.",
+    icon: "🤝",
+    title: "الشراكة",
+    description: "نؤمن بأهمية الشراكة والتعاون مع المؤسسات والشركات لخدمة المجتمع.",
   },
   {
-    icon: "Icon5",
-    title: "Value 5",
-    description: "Description for value 5.",
+    icon: "🔍",
+    title: "الشفافية",
+    description: "نلتزم بالشفافية والوضوح في جميع تعاملاتنا مع المتدربين والشركاء.",
   },
   {
-    icon: "Icon6",
-    title: "Value 6",
-    description: "Description for value 6.",
+    icon: "📈",
+    title: "التطوير المستمر",
+    description: "نؤمن بأهمية التطوير المستمر والتعلم مدى الحياة لتحقيق النجاح.",
   },
 ];
 
 export const timeline = [
   {
     year: "2020",
-    milestone: "Milestone 1",
-    description: "Description for milestone 1.",
+    milestone: "تأسيس المنصة",
+    description: "تم تأسيس منصة قدرات شباب بهدف تطوير مهارات الشباب السعودي.",
   },
   {
     year: "2021",
-    milestone: "Milestone 2",
-    description: "Description for milestone 2.",
+    milestone: "أول ورشة تدريبية",
+    description: "إطلاق أول ورشة تدريبية في مجال البرمجة والتقنية.",
   },
   {
     year: "2022",
-    milestone: "Milestone 3",
-    description: "Description for milestone 3.",
+    milestone: "إطلاق البرامج المتخصصة",
+    description: "توسيع نطاق الخدمات لتشمل التسويق الرقمي والتصميم.",
   },
   {
     year: "2023",
-    milestone: "Milestone 4",
-    description: "Description for milestone 4.",
+    milestone: "الجوائز والتقدير",
+    description: "حصول المنصة على جائزة أفضل منصة تدريبية للشباب.",
   },
 ];
 
 export const team = [
   {
-    image: "image-url-1",
-    name: "Team Member 1",
-    role: "Role 1",
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop",
+    name: "أحمد محمد",
+    role: "المدير التنفيذي",
     socials: {
-      twitter: "#",
-      linkedin: "#",
+      twitter: "https://twitter.com/ahmed_mohamed",
+      linkedin: "https://linkedin.com/in/ahmed-mohamed",
     },
   },
   {
-    image: "image-url-2",
-    name: "Team Member 2",
-    role: "Role 2",
+    image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=300&h=300&fit=crop",
+    name: "فاطمة أحمد",
+    role: "مديرة التدريب",
     socials: {
-      twitter: "#",
-      linkedin: "#",
+      twitter: "https://twitter.com/fatma_ahmed",
+      linkedin: "https://linkedin.com/in/fatma-ahmed",
     },
   },
   {
-    image: "image-url-3",
-    name: "Team Member 3",
-    role: "Role 3",
+    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop",
+    name: "محمد علي",
+    role: "مدير التسويق",
     socials: {
-      twitter: "#",
-      linkedin: "#",
+      twitter: "https://twitter.com/mohamed_ali",
+      linkedin: "https://linkedin.com/in/mohamed-ali",
     },
   },
-    {
-    image: "image-url-4",
-    name: "Team Member 4",
-    role: "Role 4",
+  {
+    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=300&fit=crop",
+    name: "سارة حسن",
+    role: "مديرة التطوير",
     socials: {
-      twitter: "#",
-      linkedin: "#",
+      twitter: "https://twitter.com/sara_hassan",
+      linkedin: "https://linkedin.com/in/sara-hassan",
     },
   },
 ];
 
 export const partners = [
   {
-    logo: "logo-url-1",
-    name: "Partner 1",
+    logo: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=200&h=100&fit=crop",
+    name: "شركة التقنية المتقدمة",
   },
   {
-    logo: "logo-url-2",
-    name: "Partner 2",
+    logo: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=200&h=100&fit=crop",
+    name: "مؤسسة الإبداع الرقمي",
   },
   {
-    logo: "logo-url-3",
-    name: "Partner 3",
+    logo: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=200&h=100&fit=crop",
+    name: "مركز التطوير المهني",
   },
   {
-    logo: "logo-url-4",
-    name: "Partner 4",
-  },
-   {
-    logo: "logo-url-5",
-    name: "Partner 5",
+    logo: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=200&h=100&fit=crop",
+    name: "أكاديمية المستقبل",
   },
   {
-    logo: "logo-url-6",
-    name: "Partner 6",
+    logo: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=200&h=100&fit=crop",
+    name: "مجموعة الابتكار",
+  },
+  {
+    logo: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=200&h=100&fit=crop",
+    name: "معهد التميز التقني",
   },
 ];

@@ -168,7 +168,7 @@ function SubscribeSection() {
 const styles = {
   section: {
     padding: 'var(--spacing-3xl) 0',
-    background: 'var(--light)',
+    background: 'var(--Primary, #0517A2)',
     position: 'relative',
     overflow: 'hidden'
   },
@@ -185,21 +185,21 @@ const styles = {
   },
   textContent: {
     textAlign: 'center',
-    color: 'var(--dark)'
+    color: 'var(--white)'
   },
   title: {
     fontSize: 'clamp(1.75rem, 5vw, 2.5rem)',
     fontWeight: '900',
     marginBottom: 'var(--spacing-md)',
     textShadow: 'none',
-    color: 'var(--Primary, #0517A2)'
+    color: 'var(--white)'
   },
   subtitle: {
     fontSize: 'clamp(1rem, 3vw, 1.25rem)',
     marginBottom: 'var(--spacing-xl)',
     opacity: '0.9',
     lineHeight: '1.6',
-    color: 'var(--gray)'
+    color: 'rgba(255,255,255,0.9)'
   },
   benefits: {
     display: 'grid',
@@ -215,15 +215,16 @@ const styles = {
     fontSize: '0.875rem',
     opacity: '1',
     padding: 'var(--spacing-sm)',
-    background: 'rgba(5,23,162,0.08)',
-    borderRadius: 'var(--radius-md)'
+    background: 'rgba(255,255,255,0.1)',
+    borderRadius: 'var(--radius-md)',
+    color: 'var(--white)'
   },
   benefitIcon: {
     fontSize: '1.25rem',
-    color: 'var(--Primary, #0517A2)'
+    color: 'var(--white)'
   },
   formContent: {
-    background: 'var(--Primary, #0517A2)',
+    background: 'var(--white)',
     padding: 'var(--spacing-2xl)',
     borderRadius: 'var(--radius-xl)',
     boxShadow: 'var(--shadow-xl)',
@@ -242,12 +243,12 @@ const styles = {
   formTitle: {
     fontSize: '1.5rem',
     fontWeight: '700',
-    color: 'var(--white)',
+    color: 'var(--Primary, #0517A2)',
     marginBottom: 'var(--spacing-sm)'
   },
   formDescription: {
     fontSize: '0.875rem',
-    color: 'rgba(255,255,255,0.85)',
+    color: 'var(--gray)',
     lineHeight: '1.5',
     margin: 0
   },
@@ -259,10 +260,10 @@ const styles = {
   emailContainer: {
     display: 'flex',
     gap: 'var(--spacing-sm)',
-    background: 'var(--white)',
+    background: 'var(--light)',
     borderRadius: 'var(--radius-full)',
     padding: '4px',
-    border: '1px solid rgba(255,255,255,0.2)'
+    border: '1px solid var(--gray-light)'
   },
   emailInput: {
     flex: 1,
@@ -276,8 +277,8 @@ const styles = {
     color: 'var(--dark)'
   },
   submitButton: {
-    background: 'var(--white)',
-    color: 'var(--Primary, #0517A2)',
+    background: 'var(--Primary, #0517A2)',
+    color: 'var(--white)',
     padding: 'var(--spacing-md) var(--spacing-xl)',
     borderRadius: 'var(--radius-full)',
     border: 'none',
@@ -298,13 +299,13 @@ const styles = {
     alignItems: 'center',
     gap: 'var(--spacing-sm)',
     fontSize: '0.75rem',
-    color: 'rgba(255,255,255,0.85)',
+    color: 'var(--gray)',
     textAlign: 'center',
     justifyContent: 'center'
   },
   privacyIcon: {
     fontSize: '1rem',
-    color: 'var(--white)'
+    color: 'var(--gray)'
   },
   privacyText: {
     lineHeight: '1.4'
@@ -312,13 +313,13 @@ const styles = {
   socialProof: {
     textAlign: 'center',
     padding: 'var(--spacing-lg)',
-    background: 'var(--light)',
+    background: 'var(--Primary, #0517A2)',
     borderRadius: 'var(--radius-lg)',
     marginTop: 'var(--spacing-lg)'
   },
   socialText: {
     fontSize: '0.875rem',
-    color: 'var(--gray)',
+    color: 'rgba(255,255,255,0.8)',
     marginBottom: 'var(--spacing-sm)'
   },
   subscriberCount: {
@@ -330,11 +331,11 @@ const styles = {
   countNumber: {
     fontSize: '1.5rem',
     fontWeight: '900',
-    color: 'var(--primary)'
+    color: 'var(--white)'
   },
   countLabel: {
     fontSize: '0.875rem',
-    color: 'var(--gray)',
+    color: 'rgba(255,255,255,0.8)',
     fontWeight: '500'
   },
   successContainer: {
@@ -363,7 +364,7 @@ const styles = {
     marginBottom: 'var(--spacing-xl)'
   },
   resetButton: {
-    background: 'var(--primary)',
+    background: 'var(--Primary, #0517A2)',
     color: 'var(--white)',
     padding: 'var(--spacing-md) var(--spacing-xl)',
     borderRadius: 'var(--radius-full)',

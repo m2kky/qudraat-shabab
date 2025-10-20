@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { events } from '../data/mockData';
+import { events } from '../data/events';
 import EventCard from './events/EventCard';
 
 function EventsSection() {

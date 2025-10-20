@@ -1,5 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect, useRef } from 'react';
+import { AuthProvider } from './components/auth/AuthProvider';
+import ProtectedRoute from './components/auth/ProtectedRoute';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import './styles/global.css';
@@ -7,6 +9,7 @@ import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
 import About from './pages/About';
 import Events from './pages/Events';
+import EventDetails from './pages/EventDetails';
 import Contact from './pages/Contact';
 
 function RoutesWithFade() {
@@ -35,9 +38,14 @@ function RoutesWithFade() {
     >
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard" element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        } />
         <Route path="/about" element={<About />} />
         <Route path="/events" element={<Events />} />
+        <Route path="/events/:id" element={<EventDetails />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
     </div>
@@ -46,11 +54,13 @@ function RoutesWithFade() {
 
 function App() {
   return (
-    <Router>
-      <Header />
-      <RoutesWithFade />
-      <Footer />
-    </Router>
+    <AuthProvider>
+      <Router>
+        <Header />
+        <RoutesWithFade />
+        <Footer />
+      </Router>
+    </AuthProvider>
   );
 }
 

@@ -79,9 +79,11 @@ jspm_packages/
 
 # Nuxt.js build / generate output
 .nuxt
+dist
 
 # Gatsby files
 .cache/
+public
 
 # Storybook build outputs
 .out
@@ -91,25 +93,24 @@ jspm_packages/
 tmp/
 temp/
 
-# Figma data files
-figma-*.json
+# Firebase
+.firebase/
+firebase-debug.log
+firestore-debug.log
 
-# MCP server logs
-mcp-server.log
+# Local Netlify folder
+.netlify
 
-# OS generated files
-Thumbs.db
-ehthumbs.db
-Desktop.ini
-$RECYCLE.BIN/
+# Vercel
+.vercel
 
-# Linux
-*~
+# TypeScript
+*.tsbuildinfo
 
-# Windows
-*.cab
-*.msi
-*.msix
-*.msm
-*.msp
-*.lnk
+# Optional stylelint cache
+.stylelintcache
+
+# SvelteKit build / generate output
+.svelte-kit
+
+# End of https://www.gitignore.io/api/node

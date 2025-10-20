@@ -1,7 +1,11 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { getEventStatus } from '../../data/events';
 
 export default function EventCard({ event }) {
-  const isEventEnded = new Date(event.date) < new Date();
+  const navigate = useNavigate();
+  const eventStatus = getEventStatus(event.date);
+  const isEventEnded = eventStatus === 'انتهت';
 
   return (
     <article className="event-card" style={styles.card}>
@@ -11,9 +15,9 @@ export default function EventCard({ event }) {
 
         <div style={styles.categoryPill}>{event.category}</div>
 
-        {isEventEnded && (
-          <div style={styles.endedTag}>انتهت</div>
-        )}
+        <div style={styles.statusTag}>
+          {eventStatus}
+        </div>
 
         <div style={styles.titleArea}>
           <h3 style={styles.title}>{event.title}</h3>
@@ -36,8 +40,20 @@ export default function EventCard({ event }) {
         </div>
 
         <div style={styles.actions}>
-          <button className="details-button" style={styles.secondaryBtn}>التفاصيل</button>
-          <button className="register-button" style={styles.primaryBtn}>سجل الآن</button>
+          <button 
+            className="details-button" 
+            style={styles.secondaryBtn}
+            onClick={() => navigate(`/events/${event.id}`)}
+          >
+            التفاصيل
+          </button>
+          <button 
+            className="register-button" 
+            style={styles.primaryBtn}
+            onClick={() => navigate(`/events/${event.id}#register`)}
+          >
+            سجل الآن
+          </button>
         </div>
       </div>
     </article>
@@ -79,7 +95,7 @@ const styles = {
     fontSize: 12,
     border: '1px solid var(--Primary, #0517A2)'
   },
-  endedTag: {
+  statusTag: {
     position: 'absolute',
     top: 12,
     right: 12,

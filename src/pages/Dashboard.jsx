@@ -1,8 +1,14 @@
 import { useState } from 'react';
+import { useAuth } from '../components/auth/AuthProvider';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import EventsManagement from '../components/admin/EventsManagement';
+import GalleryManagement from '../components/admin/GalleryManagement';
+import RegistrationsView from '../components/admin/RegistrationsView';
+import StatsManagement from '../components/admin/StatsManagement';
 
 function Dashboard() {
+  const { user, logout } = useAuth();
   const [activeTab, setActiveTab] = useState('overview');
 
   const stats = [
@@ -27,9 +33,11 @@ function Dashboard() {
 
   const tabs = [
     { id: 'overview', name: 'نظرة عامة', icon: '📊' },
-    { id: 'courses', name: 'الدورات', icon: '📚' },
-    { id: 'students', name: 'المتدربين', icon: '👥' },
-    { id: 'analytics', name: 'التحليلات', icon: '📈' }
+    { id: 'events', name: 'إدارة الفعاليات', icon: '🎯' },
+    { id: 'gallery', name: 'إدارة المعرض', icon: '🖼️' },
+    { id: 'registrations', name: 'التسجيلات', icon: '📝' },
+    { id: 'stats', name: 'إدارة الإحصائيات', icon: '📈' },
+    { id: 'analytics', name: 'التحليلات', icon: '📊' }
   ];
 
   const getActivityIcon = (type) => {
@@ -57,11 +65,21 @@ function Dashboard() {
       <Header />
       <div style={styles.dashboard}>
         <div className="container" style={styles.container}>
-          {/* Dashboard Header */}
-          <div style={styles.header}>
-            <h1 style={styles.title}>لوحة التحكم</h1>
-            <p style={styles.subtitle}>مرحباً بك في لوحة تحكم منصة قدرات شباب</p>
-          </div>
+              {/* Dashboard Header */}
+              <div style={styles.header}>
+                <div style={styles.headerContent}>
+                  <div>
+                    <h1 style={styles.title}>لوحة التحكم</h1>
+                    <p style={styles.subtitle}>مرحباً بك في لوحة تحكم منصة قدرات شباب</p>
+                  </div>
+                  <div style={styles.userInfo}>
+                    <span style={styles.userEmail}>{user?.email}</span>
+                    <button onClick={logout} style={styles.logoutButton}>
+                      تسجيل الخروج
+                    </button>
+                  </div>
+                </div>
+              </div>
 
           {/* Stats Cards */}
           <div style={styles.statsGrid}>
@@ -157,18 +175,20 @@ function Dashboard() {
                 </div>
               )}
 
-              {activeTab === 'courses' && (
-                <div style={styles.coursesContent}>
-                  <h3 style={styles.sectionTitle}>إدارة الدورات</h3>
-                  <p style={styles.placeholderText}>قريباً: إدارة الدورات التدريبية</p>
-                </div>
+              {activeTab === 'events' && (
+                <EventsManagement />
               )}
 
-              {activeTab === 'students' && (
-                <div style={styles.studentsContent}>
-                  <h3 style={styles.sectionTitle}>إدارة المتدربين</h3>
-                  <p style={styles.placeholderText}>قريباً: إدارة المتدربين والتسجيلات</p>
-                </div>
+              {activeTab === 'gallery' && (
+                <GalleryManagement />
+              )}
+
+              {activeTab === 'registrations' && (
+                <RegistrationsView />
+              )}
+
+              {activeTab === 'stats' && (
+                <StatsManagement />
               )}
 
               {activeTab === 'analytics' && (
@@ -198,8 +218,37 @@ const styles = {
     padding: '0 var(--spacing-md)'
   },
   header: {
-    textAlign: 'center',
     marginBottom: 'var(--spacing-3xl)'
+  },
+  headerContent: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    gap: 'var(--spacing-md)'
+  },
+  userInfo: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: 'var(--spacing-md)'
+  },
+  userEmail: {
+    fontSize: '0.875rem',
+    color: 'var(--gray)',
+    background: 'var(--light)',
+    padding: 'var(--spacing-sm) var(--spacing-md)',
+    borderRadius: 'var(--radius-md)'
+  },
+  logoutButton: {
+    background: 'var(--error)',
+    color: 'var(--white)',
+    padding: 'var(--spacing-sm) var(--spacing-md)',
+    borderRadius: 'var(--radius-md)',
+    border: 'none',
+    fontSize: '0.875rem',
+    fontWeight: 600,
+    cursor: 'pointer',
+    transition: 'all var(--transition-fast)'
   },
   title: {
     fontSize: 'var(--font-size-3xl)',
