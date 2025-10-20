@@ -168,7 +168,7 @@ function SubscribeSection() {
 const styles = {
   section: {
     padding: 'var(--spacing-3xl) 0',
-    background: 'linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%)',
+    background: 'var(--light)',
     position: 'relative',
     overflow: 'hidden'
   },
@@ -185,19 +185,21 @@ const styles = {
   },
   textContent: {
     textAlign: 'center',
-    color: 'var(--white)'
+    color: 'var(--dark)'
   },
   title: {
     fontSize: 'clamp(1.75rem, 5vw, 2.5rem)',
     fontWeight: '900',
     marginBottom: 'var(--spacing-md)',
-    textShadow: '0 2px 4px rgba(0,0,0,0.1)'
+    textShadow: 'none',
+    color: 'var(--Primary, #0517A2)'
   },
   subtitle: {
     fontSize: 'clamp(1rem, 3vw, 1.25rem)',
     marginBottom: 'var(--spacing-xl)',
     opacity: '0.9',
-    lineHeight: '1.6'
+    lineHeight: '1.6',
+    color: 'var(--gray)'
   },
   benefits: {
     display: 'grid',
@@ -211,17 +213,17 @@ const styles = {
     alignItems: 'center',
     gap: 'var(--spacing-sm)',
     fontSize: '0.875rem',
-    opacity: '0.9',
+    opacity: '1',
     padding: 'var(--spacing-sm)',
-    background: 'rgba(255,255,255,0.1)',
-    borderRadius: 'var(--radius-md)',
-    backdropFilter: 'blur(10px)'
+    background: 'rgba(5,23,162,0.08)',
+    borderRadius: 'var(--radius-md)'
   },
   benefitIcon: {
-    fontSize: '1.25rem'
+    fontSize: '1.25rem',
+    color: 'var(--Primary, #0517A2)'
   },
   formContent: {
-    background: 'var(--white)',
+    background: 'var(--Primary, #0517A2)',
     padding: 'var(--spacing-2xl)',
     borderRadius: 'var(--radius-xl)',
     boxShadow: 'var(--shadow-xl)',
@@ -240,12 +242,12 @@ const styles = {
   formTitle: {
     fontSize: '1.5rem',
     fontWeight: '700',
-    color: 'var(--dark)',
+    color: 'var(--white)',
     marginBottom: 'var(--spacing-sm)'
   },
   formDescription: {
     fontSize: '0.875rem',
-    color: 'var(--gray)',
+    color: 'rgba(255,255,255,0.85)',
     lineHeight: '1.5',
     margin: 0
   },
@@ -257,10 +259,10 @@ const styles = {
   emailContainer: {
     display: 'flex',
     gap: 'var(--spacing-sm)',
-    background: 'var(--light)',
+    background: 'var(--white)',
     borderRadius: 'var(--radius-full)',
     padding: '4px',
-    border: '1px solid var(--gray-light)'
+    border: '1px solid rgba(255,255,255,0.2)'
   },
   emailInput: {
     flex: 1,
@@ -270,16 +272,17 @@ const styles = {
     fontSize: '1rem',
     fontFamily: 'Tajawal, sans-serif',
     direction: 'rtl',
-    outline: 'none'
+    outline: 'none',
+    color: 'var(--dark)'
   },
   submitButton: {
-    background: 'var(--primary)',
-    color: 'var(--white)',
+    background: 'var(--white)',
+    color: 'var(--Primary, #0517A2)',
     padding: 'var(--spacing-md) var(--spacing-xl)',
     borderRadius: 'var(--radius-full)',
     border: 'none',
     fontSize: '1rem',
-    fontWeight: '600',
+    fontWeight: '800',
     cursor: 'pointer',
     transition: 'all var(--transition-fast)',
     whiteSpace: 'nowrap'
@@ -295,12 +298,13 @@ const styles = {
     alignItems: 'center',
     gap: 'var(--spacing-sm)',
     fontSize: '0.75rem',
-    color: 'var(--gray)',
+    color: 'rgba(255,255,255,0.85)',
     textAlign: 'center',
     justifyContent: 'center'
   },
   privacyIcon: {
-    fontSize: '1rem'
+    fontSize: '1rem',
+    color: 'var(--white)'
   },
   privacyText: {
     lineHeight: '1.4'

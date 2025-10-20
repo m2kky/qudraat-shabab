@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import BookingModal from './BookingModal';
 
 function Hero() {
@@ -161,13 +162,13 @@ function Hero() {
               </div>
             </div>
             <div className="hero-cta-container" style={styles.ctaContainer}>
-              <button 
+              <Link 
+                to="/events"
                 style={styles.secondaryCta}
-                onClick={() => document.getElementById('events')?.scrollIntoView({ behavior: 'smooth' })}
                 aria-label="استكشف الفعاليات المتاحة"
               >
                 الفعاليات
-              </button>
+              </Link>
               <button 
                 style={styles.cta}
                 onClick={handleBookingClick}
@@ -215,7 +216,7 @@ function Hero() {
 
 const styles = {
   hero: {
-    minHeight: '50vh',
+    minHeight: '35vh',
     display: 'flex',
     alignItems: 'center',
     background: 'var(--white)',
@@ -225,12 +226,12 @@ const styles = {
   },
   container: {
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'column',
     alignItems: 'center',
-    gap: 'var(--spacing-3xl)',
-    padding: 'var(--spacing-2xl) 0',
-    minHeight: '40vh',
-    justifyContent: 'space-between'
+    gap: 'var(--spacing-xl)',
+    padding: 'var(--spacing-xl) 0',
+    minHeight: '30vh',
+    justifyContent: 'center'
   },
   content: {
     textAlign: 'right',
@@ -244,7 +245,7 @@ const styles = {
     fontWeight: '900',
     marginBottom: 'var(--spacing-lg)',
     lineHeight: '1.2',
-    color: 'var(--Primary, #0017BB)',
+    color: 'var(--Primary, #0517A2)',
     textAlign: 'center',
     fontFamily: 'Zain, Inter, Tajawal, sans-serif',
     fontStyle: 'normal'
@@ -252,7 +253,7 @@ const styles = {
   subtitle: {
     fontSize: 'var(--font-size-5xl)',
     marginBottom: 'var(--spacing-lg)',
-    color: 'var(--Primary, #0017BB)',
+    color: 'var(--Primary, #0517A2)',
     lineHeight: '1.2',
     fontWeight: '900',
     textAlign: 'center',
@@ -519,21 +520,28 @@ const mediaQueries = `
   
   @media (min-width: 1024px) {
     .hero-section {
-      min-height: 50vh !important;
+      min-height: 40vh !important;
     }
     
     .hero-container {
-      gap: var(--spacing-3xl) !important;
-      min-height: 40vh !important;
+      gap: var(--spacing-2xl) !important;
+      min-height: 35vh !important;
       flex-direction: row !important;
+      align-items: center !important;
+      justify-content: space-between !important;
     }
     
     .hero-content {
       order: 1 !important;
+      text-align: right !important;
+      max-width: 50% !important;
+      flex: 1 !important;
     }
     
     .hero-visual {
       order: 2 !important;
+      max-width: 50% !important;
+      flex: 1 !important;
     }
     
     .hero-image {
@@ -547,21 +555,31 @@ const mediaQueries = `
     .hero-title {
       font-size: var(--font-size-4xl) !important;
       line-height: 1.2 !important;
+      text-align: right !important;
     }
     
     .hero-subtitle {
       font-size: var(--font-size-4xl) !important;
       line-height: 1.2 !important;
+      text-align: right !important;
+    }
+    
+    .hero-cta-container {
+      justify-content: flex-start !important;
+    }
+    
+    .hero-social-proof {
+      justify-content: flex-start !important;
     }
   }
   
   @media (min-width: 1280px) {
     .hero-section {
-      min-height: 50vh !important;
+      min-height: 35vh !important;
     }
     
     .hero-container {
-      min-height: 40vh !important;
+      min-height: 30vh !important;
       flex-direction: row !important;
     }
     

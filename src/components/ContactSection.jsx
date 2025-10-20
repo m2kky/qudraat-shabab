@@ -16,19 +16,19 @@ function ContactSection() {
     {
       icon: '📧',
       title: 'البريد الإلكتروني',
-      value: 'info@qudraat-shabab.com',
-      link: 'mailto:info@qudraat-shabab.com'
+      value: 'info@qudraatteam.com',
+      link: 'mailto:@qudraatteam@gmail.com.com'
     },
     {
       icon: '📱',
       title: 'رقم الجوال',
-      value: '+966 50 123 4567',
-      link: 'tel:+966501234567'
+      value: '+201098620547',
+      link: 'tel:+201098620547'
     },
     {
       icon: '📍',
       title: 'العنوان',
-      value: 'الرياض، المملكة العربية السعودية',
+      value: '16ش دكتور السبكي - الدقي -امام الاكاديمية البحرية',
       link: null
     },
     {

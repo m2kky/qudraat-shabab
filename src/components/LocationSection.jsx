@@ -1,41 +1,19 @@
-function LocationSection() {
-  const locations = [
-    {
-      id: 1,
-      name: 'الفرع الرئيسي - الرياض',
-      address: 'شارع الملك فهد، حي العليا، الرياض 12211',
-      phone: '+966 11 123 4567',
-      email: 'riyadh@qudraat-shabab.com',
-      hours: 'الأحد - الخميس: 8:00 ص - 10:00 م',
-      image: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=600&h=400&fit=crop',
-      coordinates: { lat: 24.7136, lng: 46.6753 }
-    },
-    {
-      id: 2,
-      name: 'فرع جدة',
-      address: 'شارع التحلية، حي الزهراء، جدة 21432',
-      phone: '+966 12 123 4567',
-      email: 'jeddah@qudraat-shabab.com',
-      hours: 'الأحد - الخميس: 8:00 ص - 10:00 م',
-      image: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=600&h=400&fit=crop',
-      coordinates: { lat: 21.4858, lng: 39.1925 }
-    },
-    {
-      id: 3,
-      name: 'فرع الدمام',
-      address: 'شارع الملك عبدالعزيز، حي الفيصلية، الدمام 32245',
-      phone: '+966 13 123 4567',
-      email: 'dammam@qudraat-shabab.com',
-      hours: 'الأحد - الخميس: 8:00 ص - 10:00 م',
-      image: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=600&h=400&fit=crop',
-      coordinates: { lat: 26.4207, lng: 50.0888 }
-    }
-  ];
+import { contactInfo } from '../data/contact';
 
-  const handleGetDirections = (location) => {
-    const { lat, lng } = location.coordinates;
-    const url = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
-    window.open(url, '_blank');
+function LocationSection() {
+  const location = {
+    id: 1,
+    name: 'مقر قدرات شباب',
+    address: contactInfo.address,
+    mobile: contactInfo.mobile,
+    email: contactInfo.email,
+    phone: contactInfo.phone,
+    mapUrl: contactInfo.mapUrl,
+    image: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=600&h=400&fit=crop'
+  };
+
+  const handleGetDirections = () => {
+    window.open(location.mapUrl, '_blank');
   };
 
   const handleCall = (phone) => {
@@ -52,123 +30,114 @@ function LocationSection() {
         {/* Section Header */}
         <div style={styles.header}>
           <h2 id="location-title" style={styles.title}>
-            مواقعنا
+            موقعنا
           </h2>
           <p style={styles.subtitle}>
-            نحن موجودون في جميع أنحاء المملكة لخدمتك في أقرب موقع
+            نحن موجودون في الدقي لخدمتك في أقرب وقت
           </p>
         </div>
 
-        {/* Locations Grid */}
-        <div style={styles.locationsGrid}>
-          {locations.map(location => (
-            <div key={location.id} style={styles.locationCard}>
-              <div style={styles.imageContainer}>
-                <img 
-                  src={location.image} 
-                  alt={location.name}
-                  style={styles.locationImage}
-                />
-                <div style={styles.imageOverlay}>
-                  <button 
-                    style={styles.directionsButton}
-                    onClick={() => handleGetDirections(location)}
-                  >
-                    📍 احصل على الاتجاهات
-                  </button>
-                </div>
-              </div>
+        {/* Location Card */}
+        <div style={styles.locationContainer}>
+          <div style={styles.locationCard}>
+            <div style={styles.imageContainer}>
+              <iframe
+                src={contactInfo.mapEmbed}
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="موقع قدرات شباب"
+              ></iframe>
+            </div>
 
-              <div style={styles.locationContent}>
-                <h3 style={styles.locationName}>{location.name}</h3>
+            <div style={styles.locationContent}>
+              <h3 style={styles.locationName}>{location.name}</h3>
+              
+              <div style={styles.locationInfo}>
+                <div style={styles.infoItem}>
+                  <div style={styles.infoIcon}>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                      <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                  </div>
+                  <span style={styles.infoText}>{location.address}</span>
+                </div>
                 
-                <div style={styles.locationInfo}>
-                  <div style={styles.infoItem}>
-                    <span style={styles.infoIcon}>📍</span>
-                    <span style={styles.infoText}>{location.address}</span>
+                <div style={styles.infoItem}>
+                  <div style={styles.infoIcon}>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+                      <line x1="12" y1="18" x2="12.01" y2="18"/>
+                    </svg>
                   </div>
-                  
-                  <div style={styles.infoItem}>
-                    <span style={styles.infoIcon}>📞</span>
-                    <button 
-                      style={styles.infoButton}
-                      onClick={() => handleCall(location.phone)}
-                    >
-                      {location.phone}
-                    </button>
-                  </div>
-                  
-                  <div style={styles.infoItem}>
-                    <span style={styles.infoIcon}>📧</span>
-                    <button 
-                      style={styles.infoButton}
-                      onClick={() => handleEmail(location.email)}
-                    >
-                      {location.email}
-                    </button>
-                  </div>
-                  
-                  <div style={styles.infoItem}>
-                    <span style={styles.infoIcon}>🕒</span>
-                    <span style={styles.infoText}>{location.hours}</span>
-                  </div>
-                </div>
-
-                <div style={styles.locationActions}>
                   <button 
-                    style={styles.actionButton}
-                    onClick={() => handleGetDirections(location)}
+                    style={styles.infoButton}
+                    onClick={() => handleCall(location.mobile)}
                   >
-                    🗺️ الاتجاهات
+                    {location.mobile}
                   </button>
+                </div>
+                
+                <div style={styles.infoItem}>
+                  <div style={styles.infoIcon}>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                    </svg>
+                  </div>
                   <button 
-                    style={styles.actionButton}
+                    style={styles.infoButton}
                     onClick={() => handleCall(location.phone)}
                   >
-                    📞 اتصل بنا
+                    {location.phone}
+                  </button>
+                </div>
+                
+                <div style={styles.infoItem}>
+                  <div style={styles.infoIcon}>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                      <polyline points="22,6 12,13 2,6"/>
+                    </svg>
+                  </div>
+                  <button 
+                    style={styles.infoButton}
+                    onClick={() => handleEmail(location.email)}
+                  >
+                    {location.email}
                   </button>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
 
-        {/* Map Section */}
-        <div style={styles.mapSection}>
-          <h3 style={styles.mapTitle}>خريطة المواقع</h3>
-          <div style={styles.mapContainer}>
-            <div style={styles.mapPlaceholder}>
-              <div style={styles.mapContent}>
-                <span style={styles.mapIcon}>🗺️</span>
-                <h4 style={styles.mapText}>خريطة تفاعلية</h4>
-                <p style={styles.mapDescription}>
-                  اضغط على أي موقع أعلاه للحصول على الاتجاهات
-                </p>
+              <div style={styles.locationActions}>
+                <button 
+                  style={styles.actionButton}
+                  onClick={handleGetDirections}
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{marginLeft: '8px'}}>
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                    <circle cx="12" cy="10" r="3"/>
+                  </svg>
+                  عرض على الخريطة
+                </button>
+                <button 
+                  style={styles.actionButton}
+                  onClick={() => handleCall(location.mobile)}
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{marginLeft: '8px'}}>
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                  </svg>
+                  اتصل بنا
+                </button>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Contact Info */}
-        <div style={styles.contactInfo}>
-          <div style={styles.contactCard}>
-            <h4 style={styles.contactTitle}>معلومات التواصل العامة</h4>
-            <div style={styles.contactDetails}>
-              <div style={styles.contactItem}>
-                <span style={styles.contactIcon}>📞</span>
-                <span style={styles.contactText}>+966 50 123 4567</span>
-              </div>
-              <div style={styles.contactItem}>
-                <span style={styles.contactIcon}>📧</span>
-                <span style={styles.contactText}>info@qudraat-shabab.com</span>
-              </div>
-              <div style={styles.contactItem}>
-                <span style={styles.contactIcon}>🌐</span>
-                <span style={styles.contactText}>www.qudraat-shabab.com</span>
-              </div>
-            </div>
-          </div>
-        </div>
+        {/* Map Section removed per request */}
       </div>
     </section>
   );
@@ -202,10 +171,9 @@ const styles = {
     margin: '0 auto',
     lineHeight: '1.6'
   },
-  locationsGrid: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
-    gap: 'var(--spacing-xl)',
+  locationContainer: {
+    display: 'flex',
+    justifyContent: 'center',
     marginBottom: 'var(--spacing-3xl)'
   },
   locationCard: {
@@ -214,7 +182,9 @@ const styles = {
     overflow: 'hidden',
     boxShadow: 'var(--shadow-lg)',
     transition: 'transform var(--transition-normal)',
-    border: '1px solid var(--gray-light)'
+    border: '1px solid var(--gray-light)',
+    maxWidth: '600px',
+    width: '100%'
   },
   imageContainer: {
     position: 'relative',
@@ -274,9 +244,13 @@ const styles = {
     fontSize: '0.875rem'
   },
   infoIcon: {
-    fontSize: '1rem',
     width: '20px',
-    textAlign: 'center'
+    height: '20px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: 'var(--primary)',
+    flexShrink: 0
   },
   infoText: {
     color: 'var(--gray)',
@@ -306,7 +280,11 @@ const styles = {
     fontWeight: '500',
     cursor: 'pointer',
     transition: 'all var(--transition-fast)',
-    flex: 1
+    flex: 1,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 'var(--spacing-xs)'
   },
   mapSection: {
     marginBottom: 'var(--spacing-3xl)'
@@ -323,7 +301,26 @@ const styles = {
     borderRadius: 'var(--radius-xl)',
     overflow: 'hidden',
     boxShadow: 'var(--shadow-lg)',
-    border: '1px solid var(--gray-light)'
+    border: '1px solid var(--gray-light)',
+    position: 'relative'
+  },
+  mapOverlay: {
+    position: 'absolute',
+    top: 'var(--spacing-md)',
+    right: 'var(--spacing-md)',
+    zIndex: 10
+  },
+  mapButton: {
+    background: 'var(--primary)',
+    color: 'var(--white)',
+    padding: 'var(--spacing-sm) var(--spacing-md)',
+    borderRadius: 'var(--radius-md)',
+    border: 'none',
+    fontSize: '0.875rem',
+    fontWeight: '600',
+    cursor: 'pointer',
+    transition: 'all var(--transition-fast)',
+    boxShadow: 'var(--shadow-md)'
   },
   mapPlaceholder: {
     height: '400px',
@@ -388,22 +385,58 @@ const styles = {
   contactText: {
     color: 'var(--gray)',
     fontWeight: '500'
+  },
+  contactInfoUnderMap: {
+    marginTop: 'var(--spacing-xl)',
+    textAlign: 'center'
+  },
+  contactTitleUnderMap: {
+    fontSize: '1.25rem',
+    fontWeight: '700',
+    color: 'var(--dark)',
+    marginBottom: 'var(--spacing-lg)'
+  },
+  contactDetailsUnderMap: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+    gap: 'var(--spacing-md)',
+    maxWidth: '800px',
+    margin: '0 auto'
+  },
+  contactItemUnderMap: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 'var(--spacing-sm)',
+    fontSize: '1rem',
+    padding: 'var(--spacing-sm)',
+    background: 'var(--white)',
+    borderRadius: 'var(--radius-md)',
+    boxShadow: 'var(--shadow-sm)',
+    border: '1px solid var(--gray-light)'
+  },
+  contactIconUnderMap: {
+    fontSize: '1.25rem'
+  },
+  contactTextUnderMap: {
+    color: 'var(--gray)',
+    fontWeight: '500'
+  },
+  contactButtonUnderMap: {
+    background: 'none',
+    border: 'none',
+    color: 'var(--primary)',
+    cursor: 'pointer',
+    textDecoration: 'underline',
+    fontSize: '1rem',
+    padding: 0,
+    fontWeight: '500'
   }
 };
 
 // Media queries for responsive design
 const mediaQueries = `
-  @media (min-width: 768px) {
-    .locations-grid {
-      grid-template-columns: repeat(2, 1fr) !important;
-    }
-  }
-  
   @media (min-width: 1024px) {
-    .locations-grid {
-      grid-template-columns: repeat(3, 1fr) !important;
-    }
-    
     .location-card:hover {
       transform: translateY(-4px) !important;
     }
@@ -422,6 +455,11 @@ const mediaQueries = `
     }
     
     .directions-button:hover {
+      background: var(--primary-dark) !important;
+      transform: translateY(-2px) !important;
+    }
+    
+    .map-button:hover {
       background: var(--primary-dark) !important;
       transform: translateY(-2px) !important;
     }

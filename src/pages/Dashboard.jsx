@@ -114,7 +114,7 @@ function Dashboard() {
                             <p style={styles.activityText}>
                               <strong>{activity.user}</strong> {getActivityText(activity.type)} <strong>{activity.course}</strong>
                             </p>
-                            <span style={styles.activityTime}>{activity.time}</span>
+                            <span style={{...styles.activityTime, fontWeight: 700}}>{activity.time}</span>
                           </div>
                           <div style={{
                             ...styles.activityStatus,
@@ -134,8 +134,8 @@ function Dashboard() {
                       {upcomingEvents.map(event => (
                         <div key={event.id} style={styles.eventItem}>
                           <div style={styles.eventInfo}>
-                            <h4 style={styles.eventTitle}>{event.title}</h4>
-                            <p style={styles.eventDate}>📅 {new Date(event.date).toLocaleDateString('ar-SA')}</p>
+                            <h4 style={{...styles.eventTitle, fontWeight: 800, fontSize: '1rem'}}>{event.title}</h4>
+                            <p style={{...styles.eventDate, fontWeight: 700}}>📅 {new Date(event.date).toLocaleDateString('ar-EG')}</p>
                           </div>
                           <div style={styles.eventProgress}>
                             <div style={styles.progressBar}>

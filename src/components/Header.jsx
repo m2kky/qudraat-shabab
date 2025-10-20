@@ -26,16 +26,17 @@ function Header() {
         </Link>
 
         {/* Desktop Navigation */}
-        <nav style={styles.desktopNav} aria-label="التنقل الرئيسي">
+        <nav style={styles.desktopNav} className="desktop-nav" aria-label="التنقل الرئيسي">
           <Link to="/" style={styles.navLink}>الرئيسية</Link>
-          <a href="#events" style={styles.navLink}>الفعاليات</a>
-          <a href="#about" style={styles.navLink}>من نحن</a>
-          <a href="#contact" style={styles.navLink}>تواصل</a>
+          <Link to="/events" style={styles.navLink}>الفعاليات</Link>
+          <Link to="/about" style={styles.navLink}>من نحن</Link>
+          <Link to="/contact" style={styles.navLink}>تواصل</Link>
         </nav>
 
         {/* Mobile Menu Button */}
         <button
           style={styles.menuButton}
+          className="menu-button"
           onClick={toggleMenu}
           aria-label={isMenuOpen ? 'إغلاق القائمة' : 'فتح القائمة'}
           aria-expanded={isMenuOpen}
@@ -52,6 +53,7 @@ function Header() {
       {/* Mobile Navigation */}
       <nav 
         id="mobile-menu"
+        className="mobile-nav"
         style={{
           ...styles.mobileNav,
           display: isMenuOpen ? 'flex' : 'none'
@@ -59,9 +61,9 @@ function Header() {
         aria-label="التنقل المحمول"
       >
         <Link to="/" style={styles.mobileNavLink} onClick={closeMenu}>الرئيسية</Link>
-        <a href="#events" style={styles.mobileNavLink} onClick={closeMenu}>الفعاليات</a>
-        <a href="#about" style={styles.mobileNavLink} onClick={closeMenu}>من نحن</a>
-        <a href="#contact" style={styles.mobileNavLink} onClick={closeMenu}>تواصل</a>
+        <Link to="/events" style={styles.mobileNavLink} onClick={closeMenu}>الفعاليات</Link>
+        <Link to="/about" style={styles.mobileNavLink} onClick={closeMenu}>من نحن</Link>
+        <Link to="/contact" style={styles.mobileNavLink} onClick={closeMenu}>تواصل</Link>
       </nav>
     </header>
   );
@@ -173,11 +175,11 @@ const mediaQueries = `
   }
   
   @media (min-width: 768px) {
-    .desktop-nav {
+    .header-container .desktop-nav {
       display: flex !important;
     }
     
-    .menu-button {
+    .header-container .menu-button {
       display: none !important;
     }
     

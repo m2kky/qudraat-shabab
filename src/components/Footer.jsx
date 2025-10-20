@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { contactInfo } from '../data/contact';
 
 function Footer() {
   const currentYear = new Date().getFullYear();
@@ -11,98 +12,137 @@ function Footer() {
     <footer style={styles.footer} role="contentinfo">
       <div className="container" style={styles.container}>
         {/* Main Footer Content */}
-        <div style={styles.mainContent}>
+        <div style={styles.mainContent} className="footer-main-content">
           {/* Brand Section */}
           <div style={styles.brandSection}>
             <h3 style={styles.brandTitle}>قدرات شباب</h3>
             <p style={styles.brandDescription}>
-              منصة تدريبية متكاملة للشباب السعودي لتطوير المهارات وبناء المستقبل المهني
+              المساحة الأمنة لتطوير المهارات وبناء المستقبل المهني
             </p>
             <div style={styles.socialLinks}>
+              {/* LinkedIn */}
               <a 
-                href="https://twitter.com" 
-                style={styles.socialLink}
-                aria-label="تابعنا على تويتر"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span style={styles.socialIcon}>🐦</span>
-              </a>
-              <a 
-                href="https://linkedin.com" 
+                href={contactInfo.social.linkedin}
                 style={styles.socialLink}
                 aria-label="تابعنا على لينكد إن"
                 target="_blank"
                 rel="noopener noreferrer"
+                className="social-linkedin"
               >
-                <span style={styles.socialIcon}>💼</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 1 0-4 0v7h-4v-14h4v2a4 4 0 0 1 2-1z"/>
+                  <rect x="2" y="9" width="4" height="14"/>
+                  <circle cx="4" cy="4" r="2"/>
+                </svg>
               </a>
+              {/* Facebook */}
               <a 
-                href="https://instagram.com" 
+                href={contactInfo.social.facebook}
+                style={styles.socialLink}
+                aria-label="تابعنا على فيسبوك"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="social-facebook"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                </svg>
+              </a>
+              {/* TikTok */}
+              <a 
+                href={contactInfo.social.tiktok}
+                style={styles.socialLink}
+                aria-label="تابعنا على تيك توك"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="social-tiktok"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M21 8.5a7.5 7.5 0 0 1-6-2.5v9.5a5 5 0 1 1-5-5 5 5 0 0 1 1 .11V13a2.5 2.5 0 1 0 2.5 2.5V2h3a7 7 0 0 0 4.5 4.5z"/>
+                </svg>
+              </a>
+              {/* Instagram */}
+              <a 
+                href={contactInfo.social.instagram}
                 style={styles.socialLink}
                 aria-label="تابعنا على إنستغرام"
                 target="_blank"
                 rel="noopener noreferrer"
+                className="social-instagram"
               >
-                <span style={styles.socialIcon}>📷</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <rect x="3" y="3" width="18" height="18" rx="5" ry="5"/>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                </svg>
               </a>
+              {/* WhatsApp */}
               <a 
-                href="https://youtube.com" 
+                href={contactInfo.social.whatsapp}
                 style={styles.socialLink}
-                aria-label="اشترك في قناتنا على يوتيوب"
+                aria-label="تواصل معنا على واتساب"
                 target="_blank"
                 rel="noopener noreferrer"
+                className="social-whatsapp"
               >
-                <span style={styles.socialIcon}>📺</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M20.52 3.48A11.94 11.94 0 0 0 12.05 0C5.4 0 .05 5.35.05 11.95c0 2.1.55 4.16 1.6 5.98L0 24l6.22-1.62a11.9 11.9 0 0 0 5.83 1.49h.01c6.6 0 11.95-5.35 11.95-11.95a11.9 11.9 0 0 0-3.49-8.44zM12.06 21.8a9.84 9.84 0 0 1-5.02-1.38l-.36-.21-3.69.96.99-3.6-.23-.37a9.77 9.77 0 0 1-1.5-5.16c0-5.4 4.4-9.8 9.81-9.8 2.62 0 5.08 1.02 6.93 2.87a9.77 9.77 0 0 1 2.88 6.94c-.01 5.4-4.41 9.8-9.81 9.8zm5.38-7.34c-.29-.15-1.71-.84-1.98-.94-.27-.1-.47-.15-.67.15-.2.29-.77.94-.94 1.13-.17.19-.35.21-.64.08-.29-.15-1.23-.45-2.35-1.43-.86-.77-1.44-1.72-1.61-2.01-.17-.29-.02-.45.13-.6.13-.13.29-.35.43-.52.14-.17.19-.29.29-.48.1-.19.05-.36-.03-.52-.08-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.19 0-.5.07-.76.36s-1 1-1 2.42 1.02 2.8 1.16 2.99c.14.19 2.01 3.05 4.88 4.28.68.29 1.21.46 1.62.59.68.22 1.31.19 1.8.12.55-.08 1.71-.7 1.95-1.37.24-.67.24-1.25.17-1.37-.07-.12-.26-.19-.55-.34z"/>
+                </svg>
+              </a>
+              {/* WhatsApp Community */}
+              <a 
+                href={contactInfo.social.whatsappCommunity}
+                style={styles.socialLink}
+                aria-label="مجتمع واتساب"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="social-whatsapp-community"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <circle cx="7" cy="12" r="3"/>
+                  <circle cx="17" cy="12" r="3"/>
+                  <path d="M7 15c-3 0-5 2-5 4v2h10v-2c0-2-2-4-5-4z"/>
+                  <path d="M17 15c-3 0-5 2-5 4v2h10v-2c0-2-2-4-5-4z"/>
+                </svg>
               </a>
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div style={styles.linksSection}>
-            <h4 style={styles.sectionTitle}>روابط سريعة</h4>
-            <nav style={styles.linksList} aria-label="روابط سريعة">
-              <Link to="/" style={styles.footerLink}>الرئيسية</Link>
-              <a href="#events" style={styles.footerLink}>الفعاليات</a>
-              <a href="#about" style={styles.footerLink}>من نحن</a>
-              <a href="#contact" style={styles.footerLink}>تواصل معنا</a>
-              <Link to="/dashboard" style={styles.footerLink}>لوحة التحكم</Link>
-            </nav>
-          </div>
+          {/* Links and Contact Column */}
+          <div style={styles.linksContactColumn} className="footer-links-contact"> 
+            {/* Quick Links */}
+            <div style={styles.linksSection} className="footer-links-section">
+              <h4 style={styles.sectionTitle}>روابط سريعة</h4>
+              <nav style={styles.linksList} aria-label="روابط سريعة">
+                <Link to="/" style={styles.footerLink}>الرئيسية</Link>
+                <a href="#events" style={styles.footerLink}>الفعاليات</a>
+                <a href="#about" style={styles.footerLink}>من نحن</a>
+                <a href="#contact" style={styles.footerLink}>تواصل معنا</a>
+              </nav>
+            </div>
 
-          {/* Services */}
-          <div style={styles.linksSection}>
-            <h4 style={styles.sectionTitle}>خدماتنا</h4>
-            <nav style={styles.linksList} aria-label="خدماتنا">
-              <a href="#web-dev" style={styles.footerLink}>تطوير الويب</a>
-              <a href="#design" style={styles.footerLink}>التصميم الإبداعي</a>
-              <a href="#marketing" style={styles.footerLink}>التسويق الرقمي</a>
-              <a href="#data-science" style={styles.footerLink}>علوم البيانات</a>
-              <a href="#mobile-dev" style={styles.footerLink}>تطوير التطبيقات</a>
-            </nav>
-          </div>
-
-          {/* Contact Info */}
-          <div style={styles.contactSection}>
-            <h4 style={styles.sectionTitle}>تواصل معنا</h4>
-            <div style={styles.contactInfo}>
-              <div style={styles.contactItem}>
-                <span style={styles.contactIcon}>📧</span>
-                <a href="mailto:info@qudraat-shabab.com" style={styles.contactLink}>
-                  info@qudraat-shabab.com
-                </a>
-              </div>
-              <div style={styles.contactItem}>
-                <span style={styles.contactIcon}>📱</span>
-                <a href="tel:+966501234567" style={styles.contactLink}>
-                  +966 50 123 4567
-                </a>
-              </div>
-              <div style={styles.contactItem}>
-                <span style={styles.contactIcon}>📍</span>
-                <span style={styles.contactText}>
-                  الرياض، المملكة العربية السعودية
-                </span>
+            {/* Contact Info */}
+            <div style={styles.contactSection} className="footer-contact-section">
+              <h4 style={styles.sectionTitle}>تواصل معنا</h4>
+              <div style={styles.contactInfo}>
+                <div style={styles.contactItem}>
+                  <span style={styles.contactIcon}>📧</span>
+                  <a href={`mailto:${contactInfo.email}`} style={styles.contactLink}>
+                    {contactInfo.email}
+                  </a>
+                </div>
+                <div style={styles.contactItem}>
+                  <span style={styles.contactIcon}>📱</span>
+                  <a href={`tel:${contactInfo.mobile}`} style={styles.contactLink}>
+                    {contactInfo.mobile}
+                  </a>
+                </div>
+                <div style={styles.contactItem}>
+                  <span style={styles.contactIcon}>📍</span>
+                  <span style={styles.contactText}>
+                    {contactInfo.address}
+                  </span>
+                </div>
               </div>
             </div>
           </div>
@@ -135,7 +175,7 @@ function Footer() {
 
 const styles = {
   footer: {
-    background: 'var(--dark)',
+    background: 'var(--Primary, #0517A2)',
     color: 'var(--white)',
     marginTop: 'var(--spacing-3xl)',
     position: 'relative'
@@ -155,7 +195,7 @@ const styles = {
   brandTitle: {
     fontSize: 'var(--font-size-2xl)',
     fontWeight: '900',
-    color: 'var(--primary)',
+    color: 'var(--white)',
     marginBottom: 'var(--spacing-md)'
   },
   brandDescription: {
@@ -175,15 +215,24 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    width: '44px',
-    height: '44px',
-    background: 'rgba(255,255,255,0.1)',
-    borderRadius: 'var(--radius-full)',
-    transition: 'all var(--transition-fast)',
-    textDecoration: 'none'
+    width: '48px',
+    height: '48px',
+    background: 'rgba(255,255,255,0.08)',
+    borderRadius: '12px',
+    transition: 'all 0.3s ease',
+    textDecoration: 'none',
+    border: '1px solid rgba(255,255,255,0.1)',
+    backdropFilter: 'blur(10px)',
+    position: 'relative',
+    overflow: 'hidden'
   },
   socialIcon: {
     fontSize: '1.25rem'
+  },
+  linksContactColumn: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 'var(--spacing-2xl)'
   },
   linksSection: {
     textAlign: 'center'
@@ -266,7 +315,7 @@ const styles = {
     transition: 'color var(--transition-fast)'
   },
   backToTop: {
-    background: 'var(--primary)',
+    background: 'var(--white)',
     color: 'var(--white)',
     border: 'none',
     borderRadius: 'var(--radius-full)',
@@ -281,15 +330,64 @@ const styles = {
   },
   backToTopIcon: {
     fontSize: '1.25rem',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    color: 'var(--Primary, #0517A2)'
   }
 };
 
 // Media queries for responsive design
 const mediaQueries = `
+  /* Social Media Icons Hover Effects */
+  .social-linkedin:hover {
+    background: linear-gradient(135deg, #0077b5, #005885) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(0, 119, 181, 0.3) !important;
+  }
+  
+  .social-facebook:hover {
+    background: linear-gradient(135deg, #1877f2, #0d5bb8) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(24, 119, 242, 0.3) !important;
+  }
+  
+  .social-tiktok:hover {
+    background: linear-gradient(135deg, #000000, #333333) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4) !important;
+  }
+  
+  .social-instagram:hover {
+    background: linear-gradient(135deg, #e4405f, #c13584, #833ab4) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(228, 64, 95, 0.3) !important;
+  }
+  
+  .social-whatsapp:hover {
+    background: linear-gradient(135deg, #25d366, #128c7e) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3) !important;
+  }
+  
+  .social-whatsapp-community:hover {
+    background: linear-gradient(135deg, #25d366, #128c7e) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3) !important;
+  }
+  
+  /* General hover effect for all social icons */
+  .social-linkedin:hover svg,
+  .social-facebook:hover svg,
+  .social-tiktok:hover svg,
+  .social-instagram:hover svg,
+  .social-whatsapp:hover svg,
+  .social-whatsapp-community:hover svg {
+    color: white !important;
+    transform: scale(1.1) !important;
+  }
+
   @media (min-width: 768px) {
     .footer-main-content {
-      grid-template-columns: 2fr 1fr 1fr 1fr !important;
+      grid-template-columns: 1fr 1fr !important;
       text-align: left !important;
     }
     
@@ -322,6 +420,17 @@ const mediaQueries = `
       justify-content: space-between !important;
       align-items: center !important;
     }
+  }
+  
+  @media (min-width: 1024px) {
+    .footer-links-contact {
+      display: grid !important;
+      grid-template-columns: 1fr 1fr !important;
+      gap: var(--spacing-2xl) !important;
+      align-items: start !important;
+    }
+    .footer-links-section { order: 1 !important; }
+    .footer-contact-section { order: 2 !important; }
   }
   
   @media (min-width: 1024px) {

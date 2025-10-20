@@ -1,21 +1,6 @@
+import { stats } from '../data/stats';
+
 function StatsSection() {
-  const stats = [
-    {
-      number: '2,000+',
-      label: 'طالب',
-      icon: '/assets/icons/student.svg'
-    },
-    {
-      number: '50+',
-      label: 'ورشة عملية',
-      icon: '/assets/icons/workshop.svg'
-    },
-    {
-      number: '100%',
-      label: 'مجاني',
-      icon: '/assets/icons/free.svg'
-    }
-  ];
 
   return (
     <section style={styles.section} role="region">
@@ -50,25 +35,31 @@ const styles = {
     padding: '0 var(--spacing-md)'
   },
   statsGrid: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(3, 1fr)',
-    gap: 'var(--spacing-xl)',
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    gap: 'var(--spacing-md)',
     background: 'var(--white)',
-    padding: 'var(--spacing-2xl)',
+    padding: 'var(--spacing-xl) var(--spacing-lg)',
     borderRadius: 'var(--radius-xl)',
     boxShadow: 'var(--shadow-xl)',
-    border: '1px solid var(--gray-light)'
+    border: '1px solid var(--gray-light)',
+    maxWidth: '600px',
+    margin: '0 auto'
   },
   statItem: {
     textAlign: 'center',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    gap: 'var(--spacing-sm)'
+    justifyContent: 'center',
+    gap: 'var(--spacing-xs)',
+    padding: 'var(--spacing-xs)',
+    flex: 1
   },
   statIcon: {
-    width: '2rem',
-    height: '2rem',
+    width: '1.75rem',
+    height: '1.75rem',
     marginBottom: 'var(--spacing-xs)',
     display: 'flex',
     alignItems: 'center',
@@ -80,26 +71,63 @@ const styles = {
     objectFit: 'contain'
   },
   statNumber: {
-    fontSize: 'var(--font-size-3xl)',
+    fontSize: 'clamp(1.5rem, 3vw, 2.5rem)',
     fontWeight: '900',
     color: 'var(--primary)',
     margin: 0,
     lineHeight: '1',
-    marginBottom: 'var(--spacing-sm)'
+    marginBottom: 'var(--spacing-xs)',
+    textAlign: 'center',
+    display: 'block',
+    width: '100%'
   },
   statLabel: {
-    fontSize: 'var(--font-size-lg)',
-    color: 'var(--gray)',
+    fontSize: 'clamp(0.875rem, 1.5vw, 1rem)',
+    color: 'var(--dark)',
     margin: 0,
-    fontWeight: '700'
+    fontWeight: '600',
+    textAlign: 'center',
+    display: 'block',
+    width: '100%'
   }
 };
 
 // Media queries for responsive design
 const mediaQueries = `
+  @media (min-width: 1024px) {
+    .stats-grid {
+      max-width: 700px !important;
+      padding: var(--spacing-xl) var(--spacing-2xl) !important;
+      gap: var(--spacing-lg) !important;
+      display: flex !important;
+      justify-content: space-between !important;
+    }
+    
+    .stat-item {
+      flex: 1 !important;
+    }
+    
+    .stat-icon {
+      width: 2.5rem !important;
+      height: 2.5rem !important;
+      margin-bottom: var(--spacing-sm) !important;
+    }
+    
+    .stat-number {
+      font-size: 2.5rem !important;
+      margin-bottom: var(--spacing-sm) !important;
+    }
+    
+    .stat-label {
+      font-size: 1.125rem !important;
+      font-weight: 600 !important;
+    }
+  }
+  
   @media (max-width: 768px) {
     .stats-grid {
-      grid-template-columns: repeat(3, 1fr) !important;
+      display: flex !important;
+      justify-content: space-between !important;
       gap: var(--spacing-sm) !important;
       padding: var(--spacing-md) !important;
       margin: 0 20px !important;
@@ -121,7 +149,8 @@ const mediaQueries = `
   
   @media (max-width: 480px) {
     .stats-grid {
-      grid-template-columns: repeat(3, 1fr) !important;
+      display: flex !important;
+      justify-content: space-between !important;
       gap: var(--spacing-xs) !important;
       padding: var(--spacing-sm) !important;
       margin: 0 10px !important;
