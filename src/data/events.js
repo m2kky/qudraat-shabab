@@ -1,6 +1,8 @@
+import { slugify } from '../utils/slugify.js';
+
 export const events = [
   {
-    id: 1,
+    id: 'social-media-workshop',
     title: 'إدارة الصفحات',
     subtitle: 'Social Media',
     description: 'تعلم إدارة الصفحات على وسائل التواصل الاجتماعي وبناء استراتيجيات تسويقية فعالة',
@@ -29,7 +31,7 @@ export const events = [
     ]
   },
   {
-    id: 2,
+    id: 'creative-design-workshop',
     title: 'ورشة التصميم الإبداعي',
     subtitle: 'UI/UX Design',
     description: 'تعلم أساسيات التصميم الرقمي وإنشاء تجارب مستخدم متميزة',
@@ -58,7 +60,7 @@ export const events = [
     ]
   },
   {
-    id: 3,
+    id: 'digital-marketing-workshop',
     title: 'ورشة التسويق الرقمي',
     subtitle: 'Digital Marketing',
     description: 'استراتيجيات التسويق الرقمي الحديثة وبناء العلامة التجارية الشخصية',
@@ -87,7 +89,7 @@ export const events = [
     ]
   },
   {
-    id: 4,
+    id: 'data-science-workshop',
     title: 'ورشة علوم البيانات',
     subtitle: 'Data Science',
     description: 'تعلم تحليل البيانات والذكاء الاصطناعي باستخدام Python و Machine Learning',
@@ -117,7 +119,7 @@ export const events = [
     ]
   },
   {
-    id: 5,
+    id: 'mobile-development-workshop',
     title: 'ورشة تطوير التطبيقات المحمولة',
     subtitle: 'Mobile Development',
     description: 'تعلم تطوير تطبيقات iOS و Android باستخدام React Native',
@@ -147,7 +149,7 @@ export const events = [
     ]
   },
   {
-    id: 6,
+    id: 'business-management-workshop',
     title: 'ورشة إدارة الأعمال',
     subtitle: 'Business Management',
     description: 'تعلم أساسيات إدارة الأعمال والتخطيط الاستراتيجي وقيادة الفرق',
@@ -177,7 +179,7 @@ export const events = [
     ]
   },
   {
-    id: 7,
+    id: 'content-creation-workshop',
     title: 'ورشة صناعة المحتوى',
     subtitle: 'Content Creation',
     description: 'تعلم إنشاء محتوى جذاب ومؤثر لوسائل التواصل الاجتماعي والمنصات الرقمية',
@@ -214,7 +216,7 @@ export function getEventStatus(eventDate) {
 }
 
 export function getEventById(id) {
-  return events.find(event => event.id === parseInt(id));
+  return events.find(event => event.id === id);
 }
 
 export function getEventsByCategory(category) {

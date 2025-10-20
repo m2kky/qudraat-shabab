@@ -18,8 +18,8 @@ export default function RegistrationsView() {
       // للبداية، استخدم بيانات وهمية
       const mockRegistrations = [
         {
-          id: 'REG-1-1703123456789',
-          eventId: '1',
+          id: 'REG-social-media-workshop-1703123456789',
+          eventId: 'social-media-workshop',
           eventTitle: 'إدارة الصفحات',
           firstName: 'أحمد',
           lastName: 'محمد',
@@ -33,9 +33,9 @@ export default function RegistrationsView() {
           status: 'confirmed'
         },
         {
-          id: 'REG-2-1703123456790',
-          eventId: '2',
-          eventTitle: 'ورشة تطوير الويب',
+          id: 'REG-creative-design-workshop-1703123456790',
+          eventId: 'creative-design-workshop',
+          eventTitle: 'ورشة التصميم الإبداعي',
           firstName: 'فاطمة',
           lastName: 'أحمد',
           email: 'fatma@example.com',

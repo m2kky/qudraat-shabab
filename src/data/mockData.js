@@ -1,6 +1,6 @@
 export const events = [
   {
-    id: 1,
+    id: 'social-media-workshop',
     title: 'إدارة الصفحات',
     subtitle: 'Social Media',
     description: 'تعلم إدارة الصفحات على وسائل التواصل الاجتماعي وبناء استراتيجيات تسويقية فعالة',
@@ -16,7 +16,7 @@ export const events = [
     participants: 13
   },
   {
-    id: 2,
+    id: 'creative-design-workshop',
     title: 'ورشة التصميم الإبداعي',
     subtitle: 'UI/UX Design',
     description: 'تعلم أساسيات التصميم الرقمي وإنشاء تجارب مستخدم متميزة',
@@ -32,7 +32,7 @@ export const events = [
     participants: 18
   },
   {
-    id: 3,
+    id: 'digital-marketing-workshop',
     title: 'ورشة التسويق الرقمي',
     subtitle: 'Digital Marketing',
     description: 'استراتيجيات التسويق الرقمي الحديثة وبناء العلامة التجارية الشخصية',
@@ -48,7 +48,7 @@ export const events = [
     participants: 22
   },
   {
-    id: 4,
+    id: 'data-science-workshop',
     title: 'ورشة علوم البيانات',
     subtitle: 'Data Science',
     description: 'تعلم تحليل البيانات والذكاء الاصطناعي باستخدام Python و Machine Learning',
@@ -64,7 +64,7 @@ export const events = [
     participants: 15
   },
   {
-    id: 5,
+    id: 'mobile-development-workshop',
     title: 'ورشة تطوير التطبيقات المحمولة',
     subtitle: 'Mobile Development',
     description: 'تعلم تطوير تطبيقات iOS و Android باستخدام React Native',
@@ -80,7 +80,7 @@ export const events = [
     participants: 20
   },
   {
-    id: 6,
+    id: 'business-management-workshop',
     title: 'ورشة إدارة الأعمال',
     subtitle: 'Business Management',
     description: 'تعلم أساسيات إدارة الأعمال والتخطيط الاستراتيجي وقيادة الفرق',
@@ -96,7 +96,7 @@ export const events = [
     participants: 16
   },
   {
-    id: 7,
+    id: 'content-creation-workshop',
     title: 'ورشة صناعة المحتوى',
     subtitle: 'Content Creation',
     description: 'تعلم إنشاء محتوى جذاب ومؤثر لوسائل التواصل الاجتماعي والمنصات الرقمية',

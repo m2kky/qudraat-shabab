@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc } from 'firebase/firestore';
+import { collection, getDocs, addDoc, updateDoc, deleteDoc, doc, setDoc } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
 import { db, storage } from '../../firebase/config';
+import { slugify } from '../../utils/slugify';
 import { events } from '../../data/events';
 
 export default function EventsManagement() {
@@ -95,8 +96,12 @@ export default function EventsManagement() {
         // تحديث فعالية موجودة
         await updateDoc(doc(db, 'events', editingEvent.id), eventData);
       } else {
-        // إضافة فعالية جديدة
-        await addDoc(collection(db, 'events'), eventData);
+        // إضافة فعالية جديدة مع slug
+        const eventId = slugify(formData.title);
+        await setDoc(doc(db, 'events', eventId), {
+          ...eventData,
+          id: eventId
+        });
       }
 
       setShowForm(false);
