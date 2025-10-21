@@ -1,8 +1,13 @@
 import { useState } from 'react';
 import { useAuth } from '../components/auth/AuthProvider';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import { doc, setDoc, serverTimestamp, collection, getDocs } from 'firebase/firestore';
+import { db } from '../firebase/config';
+import { slugify } from '../utils/slugify';
+// import Header from '../components/Header';
+// import Footer from '../components/Footer';
 import EventsManagement from '../components/admin/EventsManagement';
+import InstructorsManagement from '../components/admin/InstructorsManagement';
+// import TokensManagement from '../components/admin/TokensManagement'; // Removed
 import GalleryManagement from '../components/admin/GalleryManagement';
 import RegistrationsView from '../components/admin/RegistrationsView';
 import StatsManagement from '../components/admin/StatsManagement';
@@ -10,6 +15,225 @@ import StatsManagement from '../components/admin/StatsManagement';
 function Dashboard() {
   const { user, logout } = useAuth();
   const [activeTab, setActiveTab] = useState('overview');
+
+  // دالة Seed مؤقتة لرفع حدث بالـ slug
+  const seedSlugEvent = async () => {
+    try {
+      const eventId = "social-media-workshop"; // أو: slugify("إدارة الصفحات")
+      const eventData = {
+        id: eventId,
+        title: "إدارة الصفحات",
+        subtitle: "Social Media",
+        description: "تعلم إدارة الصفحات على وسائل التواصل الاجتماعي وبناء استراتيجيات تسويقية فعالة",
+        date: "2024-01-13",
+        time: "3 عصراً",
+        image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop",
+        instructor: "مجدي شعبان",
+        instructorImage: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop",
+        instructorBio: "خبير في التسويق الرقمي مع أكثر من 5 سنوات من الخبرة في إدارة الحملات التسويقية للشركات الناشئة والكبيرة. حاصل على شهادة Google Ads و Facebook Marketing.",
+        instructorExperience: ["5 سنوات خبرة في التسويق الرقمي", "100+ ورشة تدريبية", "شهادة Google Ads", "شهادة Facebook Marketing"],
+        instructorSocial: { 
+          linkedin: "https://linkedin.com/in/magdy-shaban", 
+          twitter: "https://twitter.com/magdy_shaban",
+          instagram: "https://instagram.com/magdy_shaban"
+        },
+        category: "تسويق",
+        duration: "4 أسابيع",
+        level: "مبتدئ",
+        maxParticipants: 30,
+        participants: 13,
+        syllabus: [
+          { title: "مقدمة عن إدارة الصفحات", duration: "2 ساعات", description: "تعلم أساسيات إدارة الصفحات على وسائل التواصل" },
+          { title: "استراتيجيات المحتوى", duration: "3 ساعات", description: "كيفية إنشاء محتوى جذاب ومؤثر" },
+          { title: "إدارة الحملات الإعلانية", duration: "4 ساعات", description: "تعلم إدارة الإعلانات المدفوعة" },
+          { title: "تحليل النتائج والتحسين", duration: "2 ساعات", description: "كيفية قياس الأداء وتحسين النتائج" }
+        ],
+        createdAt: serverTimestamp()
+      };
+
+      await setDoc(doc(db, "events", eventId), eventData);
+      alert("تم إنشاء الحدث بنجاح: " + eventId);
+    } catch (error) {
+      console.error('خطأ في إنشاء الحدث:', error);
+      alert('حدث خطأ في إنشاء الحدث');
+    }
+  };
+
+  // دالة لإنشاء حدث جديد بتاريخ مستقبلي
+  const createFutureEvent = async () => {
+    try {
+      const futureDate = new Date();
+      futureDate.setDate(futureDate.getDate() + 30); // بعد 30 يوم
+      const eventId = "future-workshop";
+      
+      const eventData = {
+        id: eventId,
+        title: "ورشة المستقبل",
+        subtitle: "Future Workshop",
+        description: "ورشة تجريبية بتاريخ مستقبلي لاختبار فورم التسجيل",
+        date: futureDate.toISOString().split('T')[0], // YYYY-MM-DD
+        time: "6 مساءً",
+        image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=300&fit=crop",
+        instructor: "أحمد المستقبل",
+        instructorImage: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop",
+        instructorBio: "خبير في التكنولوجيا المستقبلية مع خبرة واسعة في الابتكار والتطوير.",
+        instructorExperience: ["10 سنوات خبرة", "50+ مشروع ناجح", "شهادة في التكنولوجيا المستقبلية"],
+        instructorSocial: { 
+          linkedin: "https://linkedin.com/in/ahmed-future", 
+          twitter: "https://twitter.com/ahmed_future",
+          instagram: "https://instagram.com/ahmed_future"
+        },
+        category: "تكنولوجيا",
+        duration: "3 أسابيع",
+        level: "متوسط",
+        maxParticipants: 25,
+        participants: 0,
+        syllabus: [
+          { title: "مقدمة عن المستقبل", duration: "2 ساعات", description: "نظرة عامة على التكنولوجيا المستقبلية" },
+          { title: "الذكاء الاصطناعي", duration: "3 ساعات", description: "أساسيات الذكاء الاصطناعي" },
+          { title: "الواقع الافتراضي", duration: "2 ساعات", description: "تطبيقات الواقع الافتراضي" }
+        ],
+        createdAt: serverTimestamp()
+      };
+
+      await setDoc(doc(db, "events", eventId), eventData);
+      alert("تم إنشاء الحدث المستقبلي بنجاح: " + eventId);
+    } catch (error) {
+      console.error('خطأ في إنشاء الحدث المستقبلي:', error);
+      alert('حدث خطأ في إنشاء الحدث المستقبلي');
+    }
+  };
+
+  // دالة لاختبار الاتصال بـ Firestore
+  const testFirestoreConnection = async () => {
+    try {
+      const testDoc = await getDocs(collection(db, 'instructors'));
+      alert(`الاتصال يعمل! تم العثور على ${testDoc.docs.length} مدرب في قاعدة البيانات`);
+    } catch (error) {
+      if (error.code === 'permission-denied') {
+        alert(`خطأ في الأذونات!\n\nالحل:\n1. اذهب لـ Firebase Console\n2. Firestore > Rules\n3. استبدل القواعد بالقواعد المؤقتة في ملف firestore-rules-temp.txt\n\nتحذير: هذه القواعد مؤقتة للتطوير فقط!`);
+      } else {
+        alert('خطأ في الاتصال: ' + error.message);
+      }
+    }
+  };
+
+  // دالة لإنشاء مدرب واحد للاختبار
+  const createTestInstructor = async () => {
+    try {
+      const instructor = {
+        name: "مدرب تجريبي",
+        title: "خبير في التطوير",
+        bio: "مدرب تجريبي لاختبار النظام",
+        experience: "5 سنوات خبرة\n50+ مشروع ناجح",
+        specializations: "التطوير، البرمجة، التصميم",
+        socialMedia: {
+          linkedin: "https://linkedin.com/in/test",
+          twitter: "https://twitter.com/test",
+          website: "https://test.com"
+        }
+      };
+
+      const instructorId = slugify(instructor.name);
+      const instructorData = {
+        id: instructorId,
+        ...instructor,
+        slug: instructorId,
+        image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
+        createdAt: serverTimestamp()
+      };
+
+      await setDoc(doc(db, "instructors", instructorId), instructorData);
+      alert("تم إنشاء المدرب التجريبي بنجاح!");
+    } catch (error) {
+      if (error.code === 'permission-denied') {
+        alert('خطأ في الأذونات: تأكد من تحديث قواعد Firestore');
+      } else {
+        alert('خطأ في إنشاء المدرب: ' + error.message);
+      }
+    }
+  };
+
+  // دالة لإنشاء مدربين تجريبيين
+  const seedInstructors = async () => {
+    try {
+      const instructors = [
+        {
+          name: "أحمد محمد",
+          title: "خبير في التسويق الرقمي",
+          bio: "خبير في التسويق الرقمي مع أكثر من 7 سنوات من الخبرة في إدارة الحملات التسويقية للشركات الناشئة والكبيرة. حاصل على شهادات Google Ads و Facebook Marketing و HubSpot.",
+          experience: "7 سنوات خبرة في التسويق الرقمي\n200+ حملة تسويقية ناجحة\nشهادة Google Ads\nشهادة Facebook Marketing\nشهادة HubSpot Marketing",
+          specializations: "التسويق الرقمي، إدارة الحملات الإعلانية، تحليل البيانات، بناء العلامات التجارية",
+          socialMedia: {
+            linkedin: "https://linkedin.com/in/ahmed-mohamed-marketing",
+            twitter: "https://twitter.com/ahmed_marketing",
+            instagram: "https://instagram.com/ahmed_marketing",
+            website: "https://ahmedmarketing.com"
+          }
+        },
+        {
+          name: "فاطمة أحمد",
+          title: "مصممة UI/UX محترفة",
+          bio: "مصممة UI/UX محترفة مع خبرة واسعة في تصميم التطبيقات والمواقع الإلكترونية. عملت مع شركات تقنية رائدة وحصلت على جوائز في التصميم.",
+          experience: "6 سنوات خبرة في التصميم\n50+ مشروع ناجح\nجائزة أفضل مصممة UI/UX 2023\nشهادة Adobe Creative Suite\nشهادة Figma Professional",
+          specializations: "تصميم واجهات المستخدم، تجربة المستخدم، التصميم التفاعلي، تصميم التطبيقات",
+          socialMedia: {
+            linkedin: "https://linkedin.com/in/fatma-ahmed-design",
+            instagram: "https://instagram.com/fatma_design",
+            website: "https://fatmadesign.com"
+          }
+        },
+        {
+          name: "محمد علي",
+          title: "مطور Full Stack",
+          bio: "مطور Full Stack مع خبرة 8 سنوات في تطوير التطبيقات والمواقع الإلكترونية. متخصص في React, Node.js, Python و Django.",
+          experience: "8 سنوات خبرة في التطوير\n100+ مشروع مكتمل\nشهادة AWS Solutions Architect\nشهادة React Professional\nخبير في DevOps",
+          specializations: "تطوير الويب، تطوير التطبيقات، قواعد البيانات، DevOps، الذكاء الاصطناعي",
+          socialMedia: {
+            linkedin: "https://linkedin.com/in/mohamed-ali-dev",
+            twitter: "https://twitter.com/mohamed_dev",
+            website: "https://mohameddev.com"
+          }
+        }
+      ];
+
+      let successCount = 0;
+      let errorCount = 0;
+
+      for (const instructor of instructors) {
+        try {
+          const instructorId = slugify(instructor.name);
+          const instructorData = {
+            id: instructorId,
+            ...instructor,
+            slug: instructorId,
+            image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
+            createdAt: serverTimestamp()
+          };
+
+          await setDoc(doc(db, "instructors", instructorId), instructorData);
+          successCount++;
+          console.log(`تم إنشاء المدرب: ${instructor.name}`);
+        } catch (error) {
+          errorCount++;
+          console.error(`خطأ في إنشاء المدرب ${instructor.name}:`, error);
+        }
+      }
+
+      if (successCount > 0) {
+        alert(`تم إنشاء ${successCount} مدرب بنجاح!${errorCount > 0 ? `\nفشل في إنشاء ${errorCount} مدرب` : ''}`);
+      } else {
+        alert('فشل في إنشاء جميع المدربين. تحقق من أذونات Firestore.');
+      }
+    } catch (error) {
+      console.error('خطأ عام في إنشاء المدربين:', error);
+      if (error.code === 'permission-denied') {
+        alert('خطأ في الأذونات: تأكد من أنك مسجل دخول كإدمن');
+      } else {
+        alert('حدث خطأ في إنشاء المدربين: ' + error.message);
+      }
+    }
+  };
 
   const stats = [
     { title: 'إجمالي المتدربين', value: '1,247', change: '+12%', icon: '👥', color: 'var(--primary)' },
@@ -34,6 +258,7 @@ function Dashboard() {
   const tabs = [
     { id: 'overview', name: 'نظرة عامة', icon: '📊' },
     { id: 'events', name: 'إدارة الفعاليات', icon: '🎯' },
+    { id: 'instructors', name: 'إدارة المدربين', icon: '👨‍🏫' },
     { id: 'gallery', name: 'إدارة المعرض', icon: '🖼️' },
     { id: 'registrations', name: 'التسجيلات', icon: '📝' },
     { id: 'stats', name: 'إدارة الإحصائيات', icon: '📈' },
@@ -61,9 +286,7 @@ function Dashboard() {
   };
 
   return (
-    <>
-      <Header />
-      <div style={styles.dashboard}>
+    <div style={styles.dashboard}>
         <div className="container" style={styles.container}>
               {/* Dashboard Header */}
               <div style={styles.header}>
@@ -119,6 +342,46 @@ function Dashboard() {
             <div style={styles.tabContent}>
               {activeTab === 'overview' && (
                 <div style={styles.overviewContent}>
+                  {/* Seed Buttons - مؤقت */}
+                  <div style={styles.seedSection}>
+                    <h3 style={styles.sectionTitle}>أدوات التطوير</h3>
+                    <div style={styles.buttonGroup}>
+                      <button 
+                        onClick={testFirestoreConnection}
+                        style={styles.testButton}
+                      >
+                        اختبار الاتصال بـ Firestore
+                      </button>
+                      <button 
+                        onClick={seedSlugEvent}
+                        style={styles.seedButton}
+                      >
+                        إنشاء حدث تجريبي (Seed Event)
+                      </button>
+                      <button 
+                        onClick={createFutureEvent}
+                        style={styles.seedButton}
+                      >
+                        إنشاء حدث مستقبلي (Future Event)
+                      </button>
+                      <button 
+                        onClick={createTestInstructor}
+                        style={styles.testButton}
+                      >
+                        إنشاء مدرب تجريبي واحد
+                      </button>
+                      <button 
+                        onClick={seedInstructors}
+                        style={styles.seedButton}
+                      >
+                        إنشاء مدربين تجريبيين (Seed Instructors)
+                      </button>
+                    </div>
+                    <p style={styles.seedNote}>
+                      ⚠️ هذه الأزرار مؤقتة - سيتم حذفها بعد إنشاء البيانات
+                    </p>
+                  </div>
+
                   {/* Recent Activities */}
                   <div style={styles.section}>
                     <h3 style={styles.sectionTitle}>الأنشطة الأخيرة</h3>
@@ -179,9 +442,15 @@ function Dashboard() {
                 <EventsManagement />
               )}
 
-              {activeTab === 'gallery' && (
-                <GalleryManagement />
-              )}
+                    {activeTab === 'instructors' && (
+                      <InstructorsManagement />
+                    )}
+
+                    {/* Removed Tokens Management */}
+
+                    {activeTab === 'gallery' && (
+                      <GalleryManagement />
+                    )}
 
               {activeTab === 'registrations' && (
                 <RegistrationsView />
@@ -201,8 +470,6 @@ function Dashboard() {
           </div>
         </div>
       </div>
-      <Footer />
-    </>
   );
 }
 
@@ -261,6 +528,12 @@ const styles = {
     color: 'var(--gray)',
     maxWidth: '500px',
     margin: '0 auto'
+  },
+  tokenInfo: {
+    fontSize: '0.9rem',
+    color: 'var(--primary)',
+    margin: 'var(--spacing-xs) 0 0 0',
+    fontWeight: '500'
   },
   statsGrid: {
     display: 'grid',
@@ -474,6 +747,51 @@ const styles = {
   placeholderText: {
     fontSize: '1rem',
     color: 'var(--gray)',
+    fontStyle: 'italic'
+  },
+  seedSection: {
+    background: 'var(--white)',
+    borderRadius: 'var(--radius-lg)',
+    padding: 'var(--spacing-xl)',
+    marginBottom: 'var(--spacing-xl)',
+    border: '2px dashed var(--warning)',
+    textAlign: 'center'
+  },
+  buttonGroup: {
+    display: 'flex',
+    gap: 'var(--spacing-md)',
+    justifyContent: 'center',
+    flexWrap: 'wrap',
+    marginBottom: 'var(--spacing-sm)'
+  },
+  testButton: {
+    background: 'var(--success)',
+    color: 'var(--white)',
+    padding: 'var(--spacing-md) var(--spacing-xl)',
+    borderRadius: 'var(--radius-full)',
+    border: 'none',
+    fontSize: '1rem',
+    fontWeight: '600',
+    cursor: 'pointer',
+    transition: 'all var(--transition-fast)',
+    minWidth: '200px'
+  },
+  seedButton: {
+    background: 'var(--warning)',
+    color: 'var(--white)',
+    padding: 'var(--spacing-md) var(--spacing-xl)',
+    borderRadius: 'var(--radius-full)',
+    border: 'none',
+    fontSize: '1rem',
+    fontWeight: '600',
+    cursor: 'pointer',
+    transition: 'all var(--transition-fast)',
+    minWidth: '200px'
+  },
+  seedNote: {
+    fontSize: '0.875rem',
+    color: 'var(--gray)',
+    margin: 0,
     fontStyle: 'italic'
   }
 };

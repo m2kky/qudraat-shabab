@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Zain:wght@300;400;500;700;900&display=swap');
+
 :root {
   --transition-page: .2s ease-out;
 }
@@ -6,10 +10,6 @@
 @media (prefers-reduced-motion: reduce) {
   .route-fade { transition: none !important; }
 }
-
-@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Zain:wght@300;400;500;700;900&display=swap');
 
 * {
   margin: 0;

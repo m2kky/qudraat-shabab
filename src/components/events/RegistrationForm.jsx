@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
+import { db } from '../../firebase/config';
 
 export default function RegistrationForm({ eventId }) {
   const navigate = useNavigate();
@@ -27,8 +29,22 @@ export default function RegistrationForm({ eventId }) {
     setIsSubmitting(true);
 
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      // حفظ التسجيل في Firestore
+      const registrationData = {
+        eventId: eventId, // eventId هو slug من الـ route
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        dateOfBirth: formData.dateOfBirth,
+        whatsapp: formData.whatsapp,
+        city: formData.city,
+        job: formData.job,
+        college: formData.college,
+        registrationDate: serverTimestamp(),
+        status: 'confirmed'
+      };
+
+      const docRef = await addDoc(collection(db, 'registrations'), registrationData);
       
       // Generate registration number: REG-{eventId}-{timestamp}
       const regNumber = `REG-${eventId}-${Date.now()}`;

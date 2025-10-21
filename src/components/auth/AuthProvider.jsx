@@ -16,6 +16,9 @@ export function AuthProvider({ children }) {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
       setLoading(false);
+    }, (error) => {
+      console.error('خطأ في المصادقة:', error);
+      setLoading(false);
     });
 
     return unsubscribe;
@@ -37,7 +40,20 @@ export function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider value={value}>
-      {!loading && children}
+      {loading ? (
+        <div style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          minHeight: '100vh',
+          fontSize: '1.2rem',
+          color: '#666'
+        }}>
+          جار التحميل...
+        </div>
+      ) : (
+        children
+      )}
     </AuthContext.Provider>
   );
 }

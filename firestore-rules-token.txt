@@ -1,0 +1,77 @@
+# قواعد Firestore مع نظام Access Token
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // قواعد عامة للقراءة - متاحة للجميع
+    match /events/{eventId} {
+      allow read: if true; // أي شخص يمكنه قراءة الأحداث
+    }
+    
+    match /instructors/{instructorId} {
+      allow read: if true; // أي شخص يمكنه قراءة المدربين
+    }
+    
+    match /gallery/{imageId} {
+      allow read: if true; // أي شخص يمكنه رؤية المعرض
+    }
+    
+    // قواعد الكتابة - تحتاج Access Token صحيح
+    match /events/{eventId} {
+      allow write: if isValidAccessToken(['write', 'admin']);
+    }
+    
+    match /instructors/{instructorId} {
+      allow write: if isValidAccessToken(['write', 'admin']);
+    }
+    
+    match /gallery/{imageId} {
+      allow write: if isValidAccessToken(['write', 'admin']);
+    }
+    
+    // قواعد Access Tokens - فقط للـ admin
+    match /accessTokens/{tokenId} {
+      allow read: if isValidAccessToken(['admin']);
+      allow write: if isValidAccessToken(['admin']);
+    }
+    
+    // قواعد التسجيلات - قراءة للـ admin، كتابة للجميع
+    match /registrations/{registrationId} {
+      allow read: if isValidAccessToken(['read', 'admin']);
+      allow create: if true; // أي شخص يمكنه التسجيل
+    }
+    
+    // دالة للتحقق من صحة Access Token
+    function isValidAccessToken(requiredPermissions) {
+      // الحصول على الـ token من request headers
+      let token = request.headers['authorization'];
+      if (token == null) {
+        return false;
+      }
+      
+      // إزالة "Bearer " من بداية الـ token
+      token = token.replace('Bearer ', '');
+      
+      // البحث عن الـ token في قاعدة البيانات
+      let tokenDoc = get(/databases/$(database)/documents/accessTokens/$(token)).data;
+      
+      // التحقق من وجود الـ token
+      if (tokenDoc == null) {
+        return false;
+      }
+      
+      // التحقق من أن الـ token نشط
+      if (tokenDoc.isActive != true) {
+        return false;
+      }
+      
+      // التحقق من انتهاء الصلاحية
+      if (tokenDoc.expiresAt != null && tokenDoc.expiresAt < request.time) {
+        return false;
+      }
+      
+      // التحقق من الصلاحيات
+      return tokenDoc.permissions.hasAny(requiredPermissions);
+    }
+  }
+}

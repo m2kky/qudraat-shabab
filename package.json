@@ -28,7 +28,8 @@
     "test": "vitest",
     "test:ui": "vitest --ui",
     "mcp:start": "node mcp-server.js",
-    "figma:test": "node test-figma.js"
+    "figma:test": "node test-figma.js",
+    "create-master-token": "node create-master-token.js"
   },
   "dependencies": {
     "@barba/core": "^2.10.3",

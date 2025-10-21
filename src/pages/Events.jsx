@@ -1,5 +1,6 @@
-import React, { useMemo, useState } from 'react';
-import { events } from '../data/events';
+import React, { useMemo, useState, useEffect } from 'react';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../firebase/config';
 import EventCard from '../components/events/EventCard';
 import Calendar from '../components/events/Calendar';
 
@@ -23,6 +24,30 @@ export default function Events() {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(null);
+  const [events, setEvents] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // جلب الأحداث من Firestore
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const eventsSnapshot = await getDocs(collection(db, 'events'));
+        const eventsList = eventsSnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+        setEvents(eventsList);
+      } catch (error) {
+        console.error('خطأ في جلب الأحداث:', error);
+        // في حالة الخطأ، استخدم قائمة فارغة
+        setEvents([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchEvents();
+  }, []);
 
   const eventsByDate = useMemo(() => {
     const map = {};
@@ -31,7 +56,7 @@ export default function Events() {
       (map[key] ||= []).push(ev);
     }
     return map;
-  }, []);
+  }, [events]);
 
   const filtered = useMemo(() => {
     let list = [...events];
@@ -43,7 +68,7 @@ export default function Events() {
       list = list.filter(e => toKey(new Date(e.date)) === key);
     }
     return list.sort((a, b) => new Date(a.date) - new Date(b.date));
-  }, [selectedCategory, selectedDate]);
+  }, [events, selectedCategory, selectedDate]);
 
   const onPrevMonth = () => setCurrentDate(d => new Date(d.getFullYear(), d.getMonth() - 1, 1));
   const onNextMonth = () => setCurrentDate(d => new Date(d.getFullYear(), d.getMonth() + 1, 1));
@@ -91,7 +116,11 @@ export default function Events() {
           </aside>
 
           <main className="events-main" style={styles.main}>
-            {filtered.length === 0 ? (
+            {loading ? (
+              <div style={styles.loadingContainer}>
+                <p>جار تحميل الأحداث...</p>
+              </div>
+            ) : filtered.length === 0 ? (
               <div style={styles.empty}>
                 <div>لا توجد نتائج مطابقة</div>
                 <button onClick={resetFilters} style={styles.resetBtn}>مسح الفلاتر</button>
@@ -126,6 +155,7 @@ const styles = {
   main: { minHeight: 200 },
   grid: { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: 'var(--spacing-xl)' },
   empty: { background: 'white', border: '1px solid var(--gray-light)', borderRadius: 16, padding: 24, textAlign: 'center' },
+  loadingContainer: { background: 'white', border: '1px solid var(--gray-light)', borderRadius: 16, padding: 24, textAlign: 'center', color: 'var(--gray)' },
 };
 
 // Media queries for responsive design

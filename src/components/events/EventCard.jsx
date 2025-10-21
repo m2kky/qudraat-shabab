@@ -26,7 +26,7 @@ export default function EventCard({ event }) {
       </div>
 
       <div style={styles.body}>
-        <p style={styles.description}>{event.description}</p>
+        <p style={styles.description}>{event.shortDescription || event.description}</p>
 
         <div style={styles.metaRow}>
           <div style={styles.dateTime}>

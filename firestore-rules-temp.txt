@@ -1,0 +1,15 @@
+# قواعد Firestore مؤقتة للتطوير
+# انسخ هذه القواعد في Firebase Console > Firestore > Rules
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // قواعد مؤقتة للتطوير - تسمح بالقراءة والكتابة للجميع
+    match /{document=**} {
+      allow read, write: if true;
+    }
+  }
+}
+
+# تحذير: هذه القواعد مؤقتة للتطوير فقط!
+# لا تستخدمها في الإنتاج

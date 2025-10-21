@@ -1,12 +1,39 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { events } from '../data/events';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from '../firebase/config';
 import EventCard from './events/EventCard';
 
 function EventsSection() {
   const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState('all');
-  const [filteredEvents, setFilteredEvents] = useState(events.slice(0, 9));
+  const [events, setEvents] = useState([]);
+  const [filteredEvents, setFilteredEvents] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // جلب الأحداث من Firestore
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        const eventsSnapshot = await getDocs(collection(db, 'events'));
+        const eventsList = eventsSnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+        setEvents(eventsList);
+        setFilteredEvents(eventsList.slice(0, 9));
+      } catch (error) {
+        console.error('خطأ في جلب الأحداث:', error);
+        // في حالة الخطأ، استخدم قائمة فارغة
+        setEvents([]);
+        setFilteredEvents([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchEvents();
+  }, []);
 
   const categories = [
     { id: 'all', name: 'كل الورش' },
@@ -127,9 +154,19 @@ function EventsSection() {
 
         {/* Events Grid */}
         <div className="events-grid" style={styles.eventsGrid}>
-          {filteredEvents.map(event => (
-            <EventCard key={event.id} event={event} />
-          ))}
+          {loading ? (
+            <div style={styles.loadingContainer}>
+              <p>جار تحميل الأحداث...</p>
+            </div>
+          ) : filteredEvents.length > 0 ? (
+            filteredEvents.map(event => (
+              <EventCard key={event.id} event={event} />
+            ))
+          ) : (
+            <div style={styles.noEventsContainer}>
+              <p>لا توجد أحداث متاحة حالياً</p>
+            </div>
+          )}
         </div>
 
         {/* Load More Button */}
@@ -249,6 +286,20 @@ const styles = {
     cursor: 'pointer',
     transition: 'all var(--transition-fast)',
     boxShadow: 'var(--shadow-md)'
+  },
+  loadingContainer: {
+    gridColumn: '1 / -1',
+    textAlign: 'center',
+    padding: 'var(--spacing-2xl)',
+    color: 'var(--gray)',
+    fontSize: 'var(--font-size-lg)'
+  },
+  noEventsContainer: {
+    gridColumn: '1 / -1',
+    textAlign: 'center',
+    padding: 'var(--spacing-2xl)',
+    color: 'var(--gray)',
+    fontSize: 'var(--font-size-lg)'
   }
 };
 
