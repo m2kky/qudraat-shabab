@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
+import { db } from '../firebase/config';
 
 function SubscribeSection() {
   const [email, setEmail] = useState('');
@@ -28,10 +30,15 @@ function SubscribeSection() {
     setError('');
 
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      const subscriptionData = {
+        email: email.trim(),
+        subscribedAt: serverTimestamp(),
+        source: 'newsletter_section',
+        status: 'active'
+      };
+
+      await addDoc(collection(db, 'newsletterSubscribers'), subscriptionData);
       
-      console.log('Subscription email:', email);
       setIsSubscribed(true);
       setEmail('');
     } catch (error) {

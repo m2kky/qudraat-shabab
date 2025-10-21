@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { partners } from '../../data/aboutData';
+import { partners } from '../../data/aboutData.jsx';
 
 const PartnersMarquee = () => {
   return (

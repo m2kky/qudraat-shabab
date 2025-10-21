@@ -7,10 +7,12 @@ const AboutHero = () => {
       <div className="container" style={styles.container}>
         <div style={styles.content}>
           <h1 style={styles.title}>من نحن</h1>
-          <p style={styles.subtitle}>ننمّي قدرات الشباب عبر ورش وبرامج تدريبية عملية يقودها خبراء.</p>
+          <p style={styles.subtitle}>مبادرة قدرات شباب هي مبادرة شبابية مجانية هدفها الأول مساعدة الشباب على اكتشاف مجالات سوق العمل وفهم متطلباته الحقيقية.</p>
+          <p style={styles.subtitle}>نحن مساحة مفتوحة للتجربة والتعلّم، نقدم ورش عملية وتفاعلية تعرّف المشاركين على أهم المجالات المطلوبة حاليًا في السوق، من التكنولوجيا وريادة الأعمال وحتى المهارات الشخصية، ليتمكن كل شاب من معرفة المجال الأنسب له قبل أن يبدأ رحلته المهنية.
+          نؤمن أن الخطوة الأولى نحو النجاح هي الفهم، وأن المعرفة هي أقصر طريق لاكتشاف الذات.</p>
         </div>
         <div style={styles.media}>
-          <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800" alt="تعلم وتطوير" style={styles.image} />
+          <img src="assets/aboutimage.jpg" alt="تعلم وتطوير" style={styles.image} />
         </div>
       </div>
     </section>

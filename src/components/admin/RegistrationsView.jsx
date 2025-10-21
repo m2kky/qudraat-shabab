@@ -7,6 +7,7 @@ export default function RegistrationsView() {
   const [loading, setLoading] = useState(false);
   const [filter, setFilter] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectedRegistration, setSelectedRegistration] = useState(null);
 
   useEffect(() => {
     loadRegistrations();
@@ -15,7 +16,15 @@ export default function RegistrationsView() {
   const loadRegistrations = async () => {
     try {
       setLoading(true);
-      // للبداية، استخدم بيانات وهمية
+      const registrationsSnapshot = await getDocs(collection(db, 'registrations'));
+      const registrationsList = registrationsSnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+      setRegistrations(registrationsList);
+    } catch (error) {
+      console.error('Error loading registrations:', error);
+      // في حالة الخطأ، استخدم بيانات وهمية
       const mockRegistrations = [
         {
           id: 'REG-social-media-workshop-1703123456789',
@@ -26,7 +35,6 @@ export default function RegistrationsView() {
           email: 'ahmed@example.com',
           dateOfBirth: '1995-01-01',
           whatsapp: '+966501234567',
-          city: 'الرياض',
           job: 'مطور ويب',
           college: 'جامعة الملك سعود',
           registrationDate: '2024-01-15T10:30:00Z',
@@ -41,7 +49,6 @@ export default function RegistrationsView() {
           email: 'fatma@example.com',
           dateOfBirth: '1998-05-15',
           whatsapp: '+966501234568',
-          city: 'جدة',
           job: 'مصممة جرافيك',
           college: 'جامعة الملك عبدالعزيز',
           registrationDate: '2024-01-16T14:20:00Z',
@@ -56,7 +63,6 @@ export default function RegistrationsView() {
           email: 'mohamed@example.com',
           dateOfBirth: '1992-12-10',
           whatsapp: '+966501234569',
-          city: 'الدمام',
           job: 'مدير تسويق',
           college: 'جامعة البترول',
           registrationDate: '2024-01-17T09:15:00Z',
@@ -64,8 +70,6 @@ export default function RegistrationsView() {
         }
       ];
       setRegistrations(mockRegistrations);
-    } catch (error) {
-      console.error('Error loading registrations:', error);
     } finally {
       setLoading(false);
     }
@@ -205,7 +209,7 @@ export default function RegistrationsView() {
                 <th style={styles.th}>الاسم</th>
                 <th style={styles.th}>البريد الإلكتروني</th>
                 <th style={styles.th}>الورشة</th>
-                <th style={styles.th}>المدينة</th>
+                <th style={styles.th}>الوظيفة</th>
                 <th style={styles.th}>تاريخ التسجيل</th>
                 <th style={styles.th}>الحالة</th>
                 <th style={styles.th}>الإجراءات</th>
@@ -238,7 +242,7 @@ export default function RegistrationsView() {
                     </span>
                   </td>
                   <td style={styles.td}>
-                    <span style={styles.city}>{registration.city}</span>
+                    <span style={styles.job}>{registration.job}</span>
                   </td>
                   <td style={styles.td}>
                     <span style={styles.date}>
@@ -257,6 +261,12 @@ export default function RegistrationsView() {
                   </td>
                   <td style={styles.td}>
                     <div style={styles.actions}>
+                      <button
+                        onClick={() => setSelectedRegistration(registration)}
+                        style={styles.viewButton}
+                      >
+                        عرض التفاصيل
+                      </button>
                       {registration.status === 'pending' && (
                         <button
                           onClick={() => handleStatusChange(registration.id, 'confirmed')}
@@ -291,6 +301,103 @@ export default function RegistrationsView() {
       {filteredRegistrations.length === 0 && !loading && (
         <div style={styles.emptyState}>
           <p>لا توجد تسجيلات مطابقة للبحث</p>
+        </div>
+      )}
+
+      {/* Registration Details Modal */}
+      {selectedRegistration && (
+        <div style={styles.modalOverlay}>
+          <div style={styles.modalContent}>
+            <div style={styles.modalHeader}>
+              <h2 style={styles.modalTitle}>تفاصيل التسجيل</h2>
+              <button 
+                onClick={() => setSelectedRegistration(null)}
+                style={styles.closeButton}
+              >
+                ×
+              </button>
+            </div>
+            
+            <div style={styles.modalBody}>
+              <div style={styles.detailsGrid}>
+                <div style={styles.detailSection}>
+                  <h3 style={styles.sectionTitle}>المعلومات الشخصية</h3>
+                  <div style={styles.detailItem}>
+                    <span style={styles.detailLabel}>الاسم الكامل:</span>
+                    <span style={styles.detailValue}>
+                      {selectedRegistration.firstName} {selectedRegistration.lastName}
+                    </span>
+                  </div>
+                  <div style={styles.detailItem}>
+                    <span style={styles.detailLabel}>البريد الإلكتروني:</span>
+                    <span style={styles.detailValue}>{selectedRegistration.email}</span>
+                  </div>
+                  <div style={styles.detailItem}>
+                    <span style={styles.detailLabel}>تاريخ الميلاد:</span>
+                    <span style={styles.detailValue}>{selectedRegistration.dateOfBirth}</span>
+                  </div>
+                  <div style={styles.detailItem}>
+                    <span style={styles.detailLabel}>رقم الواتساب:</span>
+                    <span style={styles.detailValue}>{selectedRegistration.whatsapp}</span>
+                  </div>
+                </div>
+
+                <div style={styles.detailSection}>
+                  <h3 style={styles.sectionTitle}>المعلومات المهنية</h3>
+                  <div style={styles.detailItem}>
+                    <span style={styles.detailLabel}>الوظيفة:</span>
+                    <span style={styles.detailValue}>{selectedRegistration.job}</span>
+                  </div>
+                  <div style={styles.detailItem}>
+                    <span style={styles.detailLabel}>الجامعة/المؤسسة:</span>
+                    <span style={styles.detailValue}>{selectedRegistration.college}</span>
+                  </div>
+                </div>
+
+                <div style={styles.detailSection}>
+                  <h3 style={styles.sectionTitle}>معلومات التسجيل</h3>
+                  <div style={styles.detailItem}>
+                    <span style={styles.detailLabel}>رقم التسجيل:</span>
+                    <span style={styles.detailValue}>{selectedRegistration.id}</span>
+                  </div>
+                  <div style={styles.detailItem}>
+                    <span style={styles.detailLabel}>الفعالية:</span>
+                    <span style={styles.detailValue}>{selectedRegistration.eventTitle}</span>
+                  </div>
+                  <div style={styles.detailItem}>
+                    <span style={styles.detailLabel}>تاريخ التسجيل:</span>
+                    <span style={styles.detailValue}>
+                      {new Date(selectedRegistration.registrationDate).toLocaleDateString('ar-EG', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                      })}
+                    </span>
+                  </div>
+                  <div style={styles.detailItem}>
+                    <span style={styles.detailLabel}>الحالة:</span>
+                    <span style={{
+                      ...styles.statusBadge,
+                      background: getStatusColor(selectedRegistration.status)
+                    }}>
+                      {getStatusText(selectedRegistration.status)}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div style={styles.modalFooter}>
+              <button 
+                onClick={() => setSelectedRegistration(null)}
+                style={styles.closeModalButton}
+              >
+                إغلاق
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </div>
@@ -445,8 +552,148 @@ const styles = {
     fontWeight: 600,
     color: 'var(--dark)'
   },
-  city: {
-    color: 'var(--gray)'
+  job: {
+    color: 'var(--gray)',
+    fontSize: '0.875rem'
+  },
+  viewButton: {
+    background: 'var(--primary)',
+    color: 'var(--white)',
+    border: 'none',
+    borderRadius: 'var(--radius-sm)',
+    padding: 'var(--spacing-xs) var(--spacing-sm)',
+    fontSize: '0.75rem',
+    cursor: 'pointer',
+    marginRight: 'var(--spacing-xs)',
+    transition: 'all var(--transition-fast)',
+    '&:hover': {
+      background: 'var(--secondary)'
+    }
+  },
+  modalOverlay: {
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    background: 'rgba(0, 0, 0, 0.6)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    zIndex: 1000,
+    padding: 'var(--spacing-lg)'
+  },
+  modalContent: {
+    background: 'var(--white)',
+    borderRadius: 'var(--radius-lg)',
+    boxShadow: 'var(--shadow-xl)',
+    maxWidth: '800px',
+    width: '100%',
+    maxHeight: '90vh',
+    overflow: 'auto'
+  },
+  modalHeader: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 'var(--spacing-xl)',
+    borderBottom: '1px solid var(--gray-light)'
+  },
+  modalTitle: {
+    fontSize: '1.5rem',
+    fontWeight: '700',
+    color: 'var(--dark)',
+    margin: 0
+  },
+  closeButton: {
+    background: 'transparent',
+    border: 'none',
+    fontSize: '2rem',
+    color: 'var(--gray)',
+    cursor: 'pointer',
+    width: '40px',
+    height: '40px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: '50%',
+    transition: 'all var(--transition-fast)',
+    '&:hover': {
+      background: 'var(--gray-light)',
+      color: 'var(--dark)'
+    }
+  },
+  modalBody: {
+    padding: 'var(--spacing-xl)'
+  },
+  detailsGrid: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+    gap: 'var(--spacing-xl)'
+  },
+  detailSection: {
+    background: 'var(--light)',
+    padding: 'var(--spacing-lg)',
+    borderRadius: 'var(--radius-md)',
+    border: '1px solid var(--gray-light)'
+  },
+  sectionTitle: {
+    fontSize: '1.125rem',
+    fontWeight: '700',
+    color: 'var(--primary)',
+    marginBottom: 'var(--spacing-lg)',
+    paddingBottom: 'var(--spacing-sm)',
+    borderBottom: '2px solid var(--primary)'
+  },
+  detailItem: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 'var(--spacing-sm) 0',
+    borderBottom: '1px solid var(--gray-light)',
+    '&:last-child': {
+      borderBottom: 'none'
+    }
+  },
+  detailLabel: {
+    fontSize: '0.875rem',
+    fontWeight: '600',
+    color: 'var(--gray)',
+    minWidth: '120px'
+  },
+  detailValue: {
+    fontSize: '0.875rem',
+    color: 'var(--dark)',
+    fontWeight: '500',
+    textAlign: 'left',
+    flex: 1
+  },
+  statusBadge: {
+    padding: 'var(--spacing-xs) var(--spacing-sm)',
+    borderRadius: 'var(--radius-full)',
+    fontSize: '0.75rem',
+    fontWeight: '600',
+    color: 'var(--white)'
+  },
+  modalFooter: {
+    padding: 'var(--spacing-xl)',
+    borderTop: '1px solid var(--gray-light)',
+    display: 'flex',
+    justifyContent: 'flex-end'
+  },
+  closeModalButton: {
+    background: 'var(--primary)',
+    color: 'var(--white)',
+    border: 'none',
+    borderRadius: 'var(--radius-md)',
+    padding: 'var(--spacing-md) var(--spacing-xl)',
+    fontSize: '1rem',
+    fontWeight: '600',
+    cursor: 'pointer',
+    transition: 'all var(--transition-fast)',
+    '&:hover': {
+      background: 'var(--secondary)'
+    }
   },
   date: {
     fontSize: '0.75rem',

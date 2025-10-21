@@ -5,8 +5,10 @@ import { db } from '../firebase/config';
 import { slugify } from '../utils/slugify';
 // import Header from '../components/Header';
 // import Footer from '../components/Footer';
+import ModernDashboard from '../components/admin/ModernDashboard';
 import EventsManagement from '../components/admin/EventsManagement';
 import InstructorsManagement from '../components/admin/InstructorsManagement';
+import ContactManagement from '../components/admin/ContactManagement';
 // import TokensManagement from '../components/admin/TokensManagement'; // Removed
 import GalleryManagement from '../components/admin/GalleryManagement';
 import RegistrationsView from '../components/admin/RegistrationsView';
@@ -259,6 +261,7 @@ function Dashboard() {
     { id: 'overview', name: 'نظرة عامة', icon: '📊' },
     { id: 'events', name: 'إدارة الفعاليات', icon: '🎯' },
     { id: 'instructors', name: 'إدارة المدربين', icon: '👨‍🏫' },
+    { id: 'contact', name: 'إدارة التواصل', icon: '📧' }, // New tab
     { id: 'gallery', name: 'إدارة المعرض', icon: '🖼️' },
     { id: 'registrations', name: 'التسجيلات', icon: '📝' },
     { id: 'stats', name: 'إدارة الإحصائيات', icon: '📈' },
@@ -341,47 +344,11 @@ function Dashboard() {
             {/* Tab Content */}
             <div style={styles.tabContent}>
               {activeTab === 'overview' && (
-                <div style={styles.overviewContent}>
-                  {/* Seed Buttons - مؤقت */}
-                  <div style={styles.seedSection}>
-                    <h3 style={styles.sectionTitle}>أدوات التطوير</h3>
-                    <div style={styles.buttonGroup}>
-                      <button 
-                        onClick={testFirestoreConnection}
-                        style={styles.testButton}
-                      >
-                        اختبار الاتصال بـ Firestore
-                      </button>
-                      <button 
-                        onClick={seedSlugEvent}
-                        style={styles.seedButton}
-                      >
-                        إنشاء حدث تجريبي (Seed Event)
-                      </button>
-                      <button 
-                        onClick={createFutureEvent}
-                        style={styles.seedButton}
-                      >
-                        إنشاء حدث مستقبلي (Future Event)
-                      </button>
-                      <button 
-                        onClick={createTestInstructor}
-                        style={styles.testButton}
-                      >
-                        إنشاء مدرب تجريبي واحد
-                      </button>
-                      <button 
-                        onClick={seedInstructors}
-                        style={styles.seedButton}
-                      >
-                        إنشاء مدربين تجريبيين (Seed Instructors)
-                      </button>
-                    </div>
-                    <p style={styles.seedNote}>
-                      ⚠️ هذه الأزرار مؤقتة - سيتم حذفها بعد إنشاء البيانات
-                    </p>
-                  </div>
+                <ModernDashboard />
+              )}
 
+              {activeTab !== 'overview' && (
+                <>
                   {/* Recent Activities */}
                   <div style={styles.section}>
                     <h3 style={styles.sectionTitle}>الأنشطة الأخيرة</h3>
@@ -435,7 +402,7 @@ function Dashboard() {
                       ))}
                     </div>
                   </div>
-                </div>
+                </>
               )}
 
               {activeTab === 'events' && (
@@ -444,6 +411,10 @@ function Dashboard() {
 
                     {activeTab === 'instructors' && (
                       <InstructorsManagement />
+                    )}
+
+                    {activeTab === 'contact' && (
+                      <ContactManagement />
                     )}
 
                     {/* Removed Tokens Management */}
